@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: feign-hystrix
+
+server:
+  port: 3333
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

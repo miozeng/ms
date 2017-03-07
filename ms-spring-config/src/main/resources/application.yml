@@ -1,0 +1,27 @@
+server:
+   port: 8888
+   
+spring:
+  application:
+    name: config
+
+
+  cloud:
+    config:
+      server:
+        git:
+           # uri: https://github.com/sunnykaka/mysteam-config-repo
+          uri: file:///E:/myworkspace/ms/ms-config-repo
+          basedir: target/config
+          searchPaths: "*"
+          
+
+    
+    
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
