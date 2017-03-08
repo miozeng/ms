@@ -4,9 +4,9 @@ import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(name = "feign-hystrix", fallback = HystrixClientFallback.class)
+@FeignClient(name = "eurekaclient")//, fallback = HystrixClientFallback.class
 public interface HystrixClient {
 
-	@RequestMapping(method = RequestMethod.GET, value = "/hello")
+	@RequestMapping(method = RequestMethod.GET, value = "/config/")
 	String iFailSometimes();
 }

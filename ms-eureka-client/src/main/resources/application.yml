@@ -1,10 +1,23 @@
+ #spring:
+ #  application:
+ #    name: eurekaclient
+ # cloud:
+ #  config:
+ #     uri: http://localhost:8888
+ #     profile: developement
+      
 spring:
   application:
-    name: eurekaclient
-  cloud:
-    config:
-      uri: http://localhost:8888
-      profile: developement
+    name: eurekaclient 
+    
+server:
+   port: 2223
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
 
    
   
