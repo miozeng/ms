@@ -10,14 +10,10 @@ spring:
     config:
       server:
         git:
-           # uri: https://github.com/sunnykaka/mysteam-config-repo
-          uri: file:///E:/myworkspace/ms/ms-config-repo
-          basedir: target/config
-          searchPaths: "*"
-          
-
-    
-    
+           uri: https://github.com/miozeng/ms
+           searchPaths: ms-config-repo
+           #uri: file:///E:/myworkspace/ms/ms-config-repo
+  
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 10
