@@ -12,3 +12,6 @@ zuul:
     customer:
       path: /customer/**
       url: http://localhost:8082
+    client:
+      path: /client/**
+      url: http://localhost:2222

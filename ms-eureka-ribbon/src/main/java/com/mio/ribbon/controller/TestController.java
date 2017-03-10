@@ -12,8 +12,13 @@ public class TestController {
 	@Autowired
     RestTemplate restTemplate;
     
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/clientconfig", method = RequestMethod.GET)
     public String add() {
         return restTemplate.getForEntity("http://EUREKACLIENT/config", String.class).getBody();
+    }
+	
+	@RequestMapping(value = "/hello", method = RequestMethod.GET)
+    public String hello() {
+        return "hello";
     }
 }

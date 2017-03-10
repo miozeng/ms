@@ -11,7 +11,7 @@ spring:
     name: eurekaclient 
     
 server:
-   port: 2223
+   port: 2222
 
 eureka:
   client:
