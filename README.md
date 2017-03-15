@@ -31,7 +31,7 @@ Spring Cloud Config配置管理开发工具包，可以让你把配置放到远�
 Spring Cloud Config Sever的管理git或svn的外部配置，集中配置到所有客户端.        
 Spring Cloud Config Client根据Spring框架的Environment和PropertySource从Spring Cloud Config Sever获取配置.     
 
-## spring-cloud-netflix:
+## spring-cloud-netflix
 针对多种Netflix组件提供的开发工具包，其中包括Eureka、Hystrix、Zuul、Archaius等。  
 Netflix Eureka：云端负载均衡，一个基于 REST 的服务，用于定位服务，以实现云端的负载均衡和中间层服务器的故障转移。  
 Netflix Hystrix：容错管理工具，旨在通过控制服务和第三方库的节点,从而对延迟和故障提供更强大的容错能力。   
