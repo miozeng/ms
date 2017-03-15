@@ -1,0 +1,12 @@
+server:
+  port: 1112
+spring:
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: cloud-stream
+  rabbitmq:
+    addresses: amqp://localhost:5672
+    username: guest
+    password: guest

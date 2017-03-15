@@ -1,0 +1,15 @@
+server:
+  port: 1113
+spring:
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: cloud-stream
+          group: group1
+         # consumer:
+           #durableSubscription: true
+  rabbitmq:
+    addresses: amqp://localhost:5672
+    username: guest
+    password: guest
