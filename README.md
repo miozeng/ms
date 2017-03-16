@@ -5,19 +5,19 @@ _项目基于Spring Boot 1.5.2.RELEASE，Spring Cloud Camden.SR5,各模块简要
 
 |project|desc|  
 |---|---|  
-|[ms-eureka-server](ms-eureka-server/README.md)|使用eureka进行服务注册和服务发现.|  
+|[ms-eureka-server](ms-eureka-server)|使用eureka进行服务注册和服务发现.|  
 |[ms-config-repo](ms-config-repo)|配置文件git地址|  
-|[ms-spring-config](ms-spring-config/README.md)|使用Spring Cloud Config实现配置集中管理.|  
-|[ms-boot-admin](ms-boot-admin/README.md)|Springboot管理|  
-|[ms-eureka-client](ms-eureka-client/README.md)|eureka客户端|  
-|[ms-data-rest](ms-data-rest/README.md)|Spring data rest使用，提供rest调用，Config配置中心客户端|  
-|[ms-eureka-ribbon](ms-eureka-ribbon/README.md)|Ribbon复杂均衡测试使用|  
-|[ms-feign-hystrix](ms-feign-hystrix/README.md)|Feign调用服务，使用hystrix实现服务隔离, hystrix dashboard和turbine进行服务监控.|  
-|[ms-gateway-zuul](ms-gateway-zuul/README.md)|服务网关|  
-|[ms-security-service](ms-security-service/README.md)|安全工具包，为你的应用程序添加安全控制，主要是指OAuth2。(未完待续)|  
-|[ms-stream-XXX](ms-stream-send/README.md)|spring-cloud-stream demo 利用stream和rabbitMQ结合写出消息收发demo和聚合demo|  
-|[ms-bus-XXX](ms-bus-server/README.md)|spring-cloud-bus动态修改配置文件| 
-|[ms-sleuth-zipkin](ms-feign-hystrix/README.md)|分布式追踪解决方案，日志收集工具包，使用了Zipkin(未完待续)|  
+|[ms-spring-config](ms-spring-config)|使用Spring Cloud Config实现配置集中管理.|  
+|[ms-boot-admin](ms-boot-admin)|Springboot管理|  
+|[ms-eureka-client](ms-eureka-client)|eureka客户端|  
+|[ms-data-rest](ms-data-rest)|Spring data rest使用，提供rest调用，Config配置中心客户端|  
+|[ms-eureka-ribbon](ms-eureka-ribbon)|Ribbon复杂均衡测试使用|  
+|[ms-feign-hystrix](ms-feign-hystrix)|Feign调用服务，使用hystrix实现服务隔离, hystrix dashboard和turbine进行服务监控.|  
+|[ms-gateway-zuul](ms-gateway-zuul)|服务网关|  
+|[ms-security-service](ms-security-service)|安全工具包，为你的应用程序添加安全控制，主要是指OAuth2。(未完待续)|  
+|[ms-stream-XXX](ms-stream-send)|spring-cloud-stream demo 利用stream和rabbitMQ结合写出消息收发demo和聚合demo|  
+|[ms-bus-XXX](ms-bus-server)|spring-cloud-bus动态修改配置文件| 
+|[ms-sleuth-zipkin](ms-feign-hystrix)|分布式追踪解决方案，日志收集工具包，使用了Zipkin(未完待续)|  
 |...|spring-cloud-zookeeper(未完待续)|  
 
 
