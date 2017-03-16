@@ -6,7 +6,7 @@ _项目基于Spring Boot 1.5.2.RELEASE，Spring Cloud Camden.SR5,各模块简要
 |project|desc|  
 |---|---|  
 |[ms-eureka-server](ms-eureka-server/README.md)|使用eureka进行服务注册和服务发现.|  
-|[ms-config-repo](ms-config-repo/README.md)|配置文件git地址|  
+|[ms-config-repo](ms-config-repo)|配置文件git地址|  
 |[ms-spring-config](ms-spring-config/README.md)|使用Spring Cloud Config实现配置集中管理.|  
 |[ms-boot-admin](ms-boot-admin/README.md)|Springboot管理|  
 |[ms-eureka-client](ms-eureka-client/README.md)|eureka客户端|  
