@@ -6,16 +6,16 @@
  #     uri: http://localhost:8888
  #     profile: developement
       
-spring:
-  application:
-    name: eurekaclient 
-  zipkin:
+ spring:
+   application:
+     name: eurekaclient 
+   zipkin:
     base-url: http://zipkin-server:9411
     
-server:
+ server:
    port: 2222
 
-eureka:
+ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/

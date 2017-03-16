@@ -1,0 +1,5 @@
+server:
+   port: 2225
+
+service:
+  prop: Prop value from Config server
