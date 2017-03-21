@@ -2,4 +2,4 @@ server:
    port: 2225
 
 service:
-  prop: Prop value from Config server2222222222222222
+  prop: Prop value from Config server22222
