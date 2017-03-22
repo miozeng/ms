@@ -2,4 +2,8 @@ server:
    port: 2225
 
 service:
+<<<<<<< HEAD
   prop: Prop value from Config server11111111
+=======
+  prop: Prop value from Config server22222
+>>>>>>> origin/master
