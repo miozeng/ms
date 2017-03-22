@@ -6,12 +6,16 @@ spring:
     name: config
 
 
+  profiles:
+    active: native
   cloud:
     config:
       server:
-        git:
-           uri: https://github.com/miozeng/ms
-           searchPaths: ms-config-repo
+        #   git:
+         #    uri: https://github.com/miozeng/ms
+          #   searchPaths: ms-config-repo
+          native:
+             searchLocations: file:///E:/myworkspace/ms/ms-config-repo
   
 eureka:
   instance:

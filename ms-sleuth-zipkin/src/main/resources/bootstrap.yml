@@ -1,6 +1,14 @@
+  
+server:
+   port: 9411
+   
+logging:
+   config: classpath:logback-spring.xml
+
 spring:
   application:
     name: zipkin-server
-    
-server:
-   port: 9411
+#   zipkin:
+    # When enabled=false, traces log to the console. Comment to send to zipkin
+ #    enabled: true
+

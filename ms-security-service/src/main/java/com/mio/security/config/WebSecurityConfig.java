@@ -11,21 +11,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-    	http.authorizeRequests()
-		.antMatchers("/", "/**", "/main.html", "js/**", "skin/**", "lib/**", "/templates/**").permitAll()
-		.and()
-		.exceptionHandling().accessDeniedPage("/main.html#/start")
-		.and()
-		.csrf().disable()
-		.formLogin()
-		.loginPage("/main.html#/start")
-		.loginProcessingUrl("/j_spring_security_check")
-		.usernameParameter("j_username")
-		.passwordParameter("j_password")
-		.permitAll()
-		.and()
-		.logout().logoutUrl("/logout").logoutSuccessUrl("/main.html#/start")
-		.permitAll();
+      http
+           .formLogin().loginPage("/login").permitAll()
+           .and()
+           .requestMatchers()
+           .antMatchers("/", "/login", "/oauth/authorize", "/oauth/confirm_access")
+           .and()
+           .authorizeRequests()
+           .anyRequest().authenticated();
     	
 		http.headers().httpStrictTransportSecurity();
 		http.headers().xssProtection();

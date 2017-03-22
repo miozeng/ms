@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: sleuth-ervice1
+  sleuth:
+    sampler:
+      percentage: 1.0
+  zipkin:
+    base-url: http://localhost:9411/
+    
+server:
+   port: 9421
+   
