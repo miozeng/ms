@@ -1,4 +1,4 @@
-package com.mio.server;
+package com.mio;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

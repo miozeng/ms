@@ -1,0 +1,5 @@
+eureka-server:
+  image: miozeng/ms-eureka-server
+  restart: always
+  ports:
+  - 8761:8761
