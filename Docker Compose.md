@@ -1,105 +1,97 @@
 ## Docker Compose
-Compose ÊÇÒ»¸öÓÃÓÚ¶¨ÒåºÍÔËÐÐ¶àÈÝÆ÷µÄDockerÓ¦ÓÃµÄ¹¤¾ß¡£
-Ê¹ÓÃCompose£¬Äã¿ÉÒÔÔÚÒ»¸öÅäÖÃÎÄ¼þ£¨yaml¸ñÊ½£©ÖÐÅäÖÃÄãÓ¦ÓÃµÄ·þÎñ£¬È»ºóÊ¹ÓÃÒ»¸öÃüÁî£¬¼´¿É´´½¨²¢Æô¶¯ÅäÖÃÖÐÒýÓÃµÄËùÓÐ·þÎñ¡£
+Compose æ˜¯ä¸€ä¸ªç”¨äºŽå®šä¹‰å’Œè¿è¡Œå¤šå®¹å™¨çš„Dockeråº”ç”¨çš„å·¥å…·ã€‚
+ä½¿ç”¨Composeï¼Œä½ å¯ä»¥åœ¨ä¸€ä¸ªé…ç½®æ–‡ä»¶ï¼ˆyamlæ ¼å¼ï¼‰ä¸­é…ç½®ä½ åº”ç”¨çš„æœåŠ¡ï¼Œç„¶åŽä½¿ç”¨ä¸€ä¸ªå‘½ä»¤ï¼Œå³å¯åˆ›å»ºå¹¶å¯åŠ¨é…ç½®ä¸­å¼•ç”¨çš„æ‰€æœ‰æœåŠ¡ã€‚
 
-### docker-compose.yml³£ÓÃÃüÁî
-image
-
-Ö¸¶¨¾µÏñÃû³Æ»òÕß¾µÏñid£¬Èç¹û¸Ã¾µÏñÔÚ±¾µØ²»´æÔÚ£¬Compose»á³¢ÊÔpullÏÂÀ´¡£
-
-Ê¾Àý£º
-
-image: java
-build
-
-Ö¸¶¨DockerfileÎÄ¼þµÄÂ·¾¶¡£¿ÉÒÔÊÇÒ»¸öÂ·¾¶£¬ÀýÈç£º
-
-build: ./dir
-Ò²¿ÉÒÔÊÇÒ»¸ö¶ÔÏó£¬ÓÃÒÔÖ¸¶¨DockerfileºÍ²ÎÊý£¬ÀýÈç£º
-
-build:
+### docker-compose.ymlå¸¸ç”¨å‘½ä»¤
+image   
+æŒ‡å®šé•œåƒåç§°æˆ–è€…é•œåƒidï¼Œå¦‚æžœè¯¥é•œåƒåœ¨æœ¬åœ°ä¸å­˜åœ¨ï¼ŒComposeä¼šå°è¯•pullä¸‹æ¥ã€‚   
+ç¤ºä¾‹ï¼š   
+image: java   
+   
+build     
+æŒ‡å®šDockerfileæ–‡ä»¶çš„è·¯å¾„ã€‚å¯ä»¥æ˜¯ä¸€ä¸ªè·¯å¾„ï¼Œä¾‹å¦‚ï¼š  
+build: ./dir   
+ä¹Ÿå¯ä»¥æ˜¯ä¸€ä¸ªå¯¹è±¡ï¼Œç”¨ä»¥æŒ‡å®šDockerfileå’Œå‚æ•°ï¼Œä¾‹å¦‚ï¼š
+```xml
+build: 
   context: ./dir
   dockerfile: Dockerfile-alternate
   args:
     buildno: 1
+```
+   
 command
-
-¸²¸ÇÈÝÆ÷Æô¶¯ºóÄ¬ÈÏÖ´ÐÐµÄÃüÁî¡£
-
-Ê¾Àý£º
-
-command: bundle exec thin -p 3000
-Ò²¿ÉÒÔÊÇÒ»¸ölist£¬ÀàËÆÓÚDockerfile×ÜµÄCMDÖ¸Áî£¬¸ñÊ½ÈçÏÂ£º
-
-command: [bundle, exec, thin, -p, 3000]
-links
-
-Á´½Óµ½ÆäËû·þÎñÖÐµÄÈÝÆ÷¡£¿ÉÒÔÖ¸¶¨·þÎñÃû³ÆºÍÁ´½ÓµÄ±ðÃûÊ¹ÓÃSERVICE:ALIAS µÄÐÎÊ½£¬»òÕßÖ»Ö¸¶¨·þÎñÃû³Æ£¬Ê¾Àý£º
-
+è¦†ç›–å®¹å™¨å¯åŠ¨åŽé»˜è®¤æ‰§è¡Œçš„å‘½ä»¤ã€‚  
+ç¤ºä¾‹ï¼š   
+command: bundle exec thin -p 3000   
+ä¹Ÿå¯ä»¥æ˜¯ä¸€ä¸ªlistï¼Œç±»ä¼¼äºŽDockerfileæ€»çš„CMDæŒ‡ä»¤ï¼Œæ ¼å¼å¦‚ä¸‹ï¼š   
+command: [bundle, exec, thin, -p, 3000]    
+     
+links   
+é“¾æŽ¥åˆ°å…¶ä»–æœåŠ¡ä¸­çš„å®¹å™¨ã€‚å¯ä»¥æŒ‡å®šæœåŠ¡åç§°å’Œé“¾æŽ¥çš„åˆ«åä½¿ç”¨SERVICE:ALIAS çš„å½¢å¼ï¼Œæˆ–è€…åªæŒ‡å®šæœåŠ¡åç§°ï¼Œç¤ºä¾‹ï¼š    
+```xml
 web:
   links:
    - db
    - db:database
    - redis
-external_links
-
-±íÊ¾Á´½Óµ½docker-compose.ymlÍâ²¿µÄÈÝÆ÷£¬ÉõÖÁ²¢·ÇCompose¹ÜÀíµÄÈÝÆ÷£¬ÌØ±ðÊÇ¶ÔÓÚÄÇÐ©Ìá¹©¹²ÏíÈÝÆ÷»ò¹²Í¬·þÎñ¡£¸ñÊ½¸úlinksÀàËÆ£¬Ê¾Àý£º
-
-external_links:
+```
+    
+external_link       
+è¡¨ç¤ºé“¾æŽ¥åˆ°docker-compose.ymlå¤–éƒ¨çš„å®¹å™¨ï¼Œç”šè‡³å¹¶éžComposeç®¡ç†çš„å®¹å™¨ï¼Œç‰¹åˆ«æ˜¯å¯¹äºŽé‚£äº›æä¾›å…±äº«å®¹å™¨æˆ–å…±åŒæœåŠ¡ã€‚æ ¼å¼è·Ÿlinksç±»ä¼¼ï¼Œç¤ºä¾‹ï¼š     
+```xml  
+external_links:    
  - redis_1
  - project_db_1:mysql
  - project_db_1:postgresql
+```
+
 ports
-
-±©Â¶¶Ë¿ÚÐÅÏ¢¡£Ê¹ÓÃËÞÖ÷¶Ë¿Ú:ÈÝÆ÷¶Ë¿ÚµÄ¸ñÊ½£¬»òÕß½ö½öÖ¸¶¨ÈÝÆ÷µÄ¶Ë¿Ú£¨´ËÊ±ËÞÖ÷»ú½«»áËæ»úÖ¸¶¨¶Ë¿Ú£©£¬ÀàËÆÓÚdocker run -p £¬Ê¾Àý£º
-
-ports:
- - "3000"
- - "3000-3005"
- - "8000:8000"
- - "9090-9091:8080-8081"
- - "49100:22"
- - "127.0.0.1:8001:8001"
- - "127.0.0.1:5000-5010:5000-5010"
-expose
-
-±©Â¶¶Ë¿Ú£¬Ö»½«¶Ë¿Ú±©Â¶¸øÁ¬½ÓµÄ·þÎñ£¬¶ø²»±©Â¶¸øËÞÖ÷»ú£¬Ê¾Àý£º
-
+æš´éœ²ç«¯å£ä¿¡æ¯ã€‚ä½¿ç”¨å®¿ä¸»ç«¯å£:å®¹å™¨ç«¯å£çš„æ ¼å¼ï¼Œæˆ–è€…ä»…ä»…æŒ‡å®šå®¹å™¨çš„ç«¯å£ï¼ˆæ­¤æ—¶å®¿ä¸»æœºå°†ä¼šéšæœºæŒ‡å®šç«¯å£ï¼‰ï¼Œç±»ä¼¼äºŽdocker run -p ï¼Œç¤ºä¾‹ï¼š
+```xml
+ports:  
+ - "3000"  
+ - "3000-3005"  
+ - "8000:8000"  
+ - "9090-9091:8080-8081"  
+ - "49100:22"  
+ - "127.0.0.1:8001:8001"  
+ - "127.0.0.1:5000-5010:5000-5010"  
+```
+ 
+expose 
+  
+æš´éœ²ç«¯å£ï¼Œåªå°†ç«¯å£æš´éœ²ç»™è¿žæŽ¥çš„æœåŠ¡ï¼Œè€Œä¸æš´éœ²ç»™å®¿ä¸»æœºï¼Œç¤ºä¾‹ï¼š
+```xml
 expose:
  - "3000"
  - "8000"
+ ```
+     
 volumes
-
-¾í¹ÒÔØÂ·¾¶ÉèÖÃ¡£¿ÉÒÔÉèÖÃËÞÖ÷»úÂ·¾¶ £¨HOST:CONTAINER£© »ò¼ÓÉÏ·ÃÎÊÄ£Ê½ £¨HOST:CONTAINER:ro£©¡£Ê¾Àý£º
-
+å·æŒ‚è½½è·¯å¾„è®¾ç½®ã€‚å¯ä»¥è®¾ç½®å®¿ä¸»æœºè·¯å¾„ ï¼ˆHOST:CONTAINERï¼‰ æˆ–åŠ ä¸Šè®¿é—®æ¨¡å¼ ï¼ˆHOST:CONTAINER:roï¼‰ã€‚ç¤ºä¾‹ï¼š
+```xml
 volumes:
-  # Just specify a path and let the Engine create a volume
   - /var/lib/mysql
-
-  # Specify an absolute path mapping
   - /opt/data:/var/lib/mysql
-
-  # Path on the host, relative to the Compose file
   - ./cache:/tmp/cache
-
-  # User-relative path
   - ~/configs:/etc/configs/:ro
-
-  # Named volume
   - datavolume:/var/lib/mysql
-volumes_from
-
-´ÓÁíÒ»¸ö·þÎñ»òÕßÈÝÆ÷¹ÒÔØ¾í¡£¿ÉÒÔÖ¸¶¨Ö»¶Á»òÕß¿É¶ÁÐ´£¬Èç¹û·ÃÎÊÄ£Ê½Ã»ÓÐÖ¸¶¨£¬ÔòÄ¬ÈÏÊÇ¿É¶ÁÐ´¡£Ê¾Àý£º
-
+  ```
+      
+volumes_from  
+ä»Žå¦ä¸€ä¸ªæœåŠ¡æˆ–è€…å®¹å™¨æŒ‚è½½å·ã€‚å¯ä»¥æŒ‡å®šåªè¯»æˆ–è€…å¯è¯»å†™ï¼Œå¦‚æžœè®¿é—®æ¨¡å¼æ²¡æœ‰æŒ‡å®šï¼Œåˆ™é»˜è®¤æ˜¯å¯è¯»å†™ã€‚ç¤ºä¾‹ï¼š   
+```xml   
 volumes_from:
  - service_name
  - service_name:ro
  - container:container_name
  - container:container_name:rw
-environment
-
-ÉèÖÃ»·¾³±äÁ¿¡£¿ÉÒÔÊ¹ÓÃÊý×é»òÕß×ÖµäÁ½ÖÖ·½Ê½¡£Ö»ÓÐÒ»¸ökeyµÄ»·¾³±äÁ¿¿ÉÒÔÔÚÔËÐÐComposeµÄ»úÆ÷ÉÏÕÒµ½¶ÔÓ¦µÄÖµ£¬ÕâÓÐÖúÓÚ¼ÓÃÜµÄ»òÕßÌØÊâÖ÷»úµÄÖµ¡£Ê¾Àý£º
-
+ ```
+     
+environment   
+è®¾ç½®çŽ¯å¢ƒå˜é‡ã€‚å¯ä»¥ä½¿ç”¨æ•°ç»„æˆ–è€…å­—å…¸ä¸¤ç§æ–¹å¼ã€‚åªæœ‰ä¸€ä¸ªkeyçš„çŽ¯å¢ƒå˜é‡å¯ä»¥åœ¨è¿è¡ŒComposeçš„æœºå™¨ä¸Šæ‰¾åˆ°å¯¹åº”çš„å€¼ï¼Œè¿™æœ‰åŠ©äºŽåŠ å¯†çš„æˆ–è€…ç‰¹æ®Šä¸»æœºçš„å€¼ã€‚ç¤ºä¾‹ï¼š
+```xml
 environment:
   RACK_ENV: development
   SHOW: 'true'
@@ -109,177 +101,150 @@ environment:
   - RACK_ENV=development
   - SHOW=true
   - SESSION_SECRET
-env_file
-
-´ÓÎÄ¼þÖÐ»ñÈ¡»·¾³±äÁ¿£¬¿ÉÒÔÎªµ¥¶ÀµÄÎÄ¼þÂ·¾¶»òÁÐ±í¡£Èç¹ûÍ¨¹ý docker-compose -f FILE Ö¸¶¨ÁËÄ£°åÎÄ¼þ£¬Ôò env_file ÖÐÂ·¾¶»á»ùÓÚÄ£°åÎÄ¼þÂ·¾¶¡£Èç¹ûÓÐ±äÁ¿Ãû³ÆÓë environment Ö¸Áî³åÍ»£¬ÔòÒÔenvirment Îª×¼¡£Ê¾Àý£º
-
+  ```
+      
+env_file   
+ä»Žæ–‡ä»¶ä¸­èŽ·å–çŽ¯å¢ƒå˜é‡ï¼Œå¯ä»¥ä¸ºå•ç‹¬çš„æ–‡ä»¶è·¯å¾„æˆ–åˆ—è¡¨ã€‚å¦‚æžœé€šè¿‡ docker-compose -f FILE æŒ‡å®šäº†æ¨¡æ¿æ–‡ä»¶ï¼Œåˆ™ env_file ä¸­è·¯å¾„ä¼šåŸºäºŽæ¨¡æ¿æ–‡ä»¶è·¯å¾„ã€‚å¦‚æžœæœ‰å˜é‡åç§°ä¸Ž environment æŒ‡ä»¤å†²çªï¼Œåˆ™ä»¥envirment ä¸ºå‡†ã€‚ç¤ºä¾‹ï¼š   
+```xml
 env_file: .env
 
 env_file:
   - ./common.env
   - ./apps/web.env
   - /opt/secrets.env
-extends
-
-¼Ì³ÐÁíÒ»¸ö·þÎñ£¬»ùÓÚÒÑÓÐµÄ·þÎñ½øÐÐÀ©Õ¹¡£
-
-net
-
-ÉèÖÃÍøÂçÄ£Ê½¡£Ê¾Àý£º
-
+  ```
+     
+extends  
+ç»§æ‰¿å¦ä¸€ä¸ªæœåŠ¡ï¼ŒåŸºäºŽå·²æœ‰çš„æœåŠ¡è¿›è¡Œæ‰©å±•ã€‚   
+   
+net   
+è®¾ç½®ç½‘ç»œæ¨¡å¼ã€‚ç¤ºä¾‹ï¼š  
+```xml
 net: "bridge"
 net: "host"
 net: "none"
 net: "container:[service name or container name/id]"
-dns
-
-ÅäÖÃdns·þÎñÆ÷¡£¿ÉÒÔÊÇÒ»¸öÖµ£¬Ò²¿ÉÒÔÊÇÒ»¸öÁÐ±í¡£Ê¾Àý£º
-
+```
+   
+dns   
+é…ç½®dnsæœåŠ¡å™¨ã€‚å¯ä»¥æ˜¯ä¸€ä¸ªå€¼ï¼Œä¹Ÿå¯ä»¥æ˜¯ä¸€ä¸ªåˆ—è¡¨ã€‚ç¤ºä¾‹ï¼š  
+```xml
 dns: 8.8.8.8
 dns:
   - 8.8.8.8
   - 9.9.9.9
-dns_search
-
-ÅäÖÃDNSµÄËÑË÷Óò£¬¿ÉÒÔÊÇÒ»¸öÖµ£¬Ò²¿ÉÒÔÊÇÒ»¸öÁÐ±í£¬Ê¾Àý£º
-
+  ```
+     
+dns_search    
+é…ç½®DNSçš„æœç´¢åŸŸï¼Œå¯ä»¥æ˜¯ä¸€ä¸ªå€¼ï¼Œä¹Ÿå¯ä»¥æ˜¯ä¸€ä¸ªåˆ—è¡¨ï¼Œç¤ºä¾‹ï¼š  
+```xml
 dns_search: example.com
 dns_search:
   - dc1.example.com
   - dc2.example.com
+```
 
-### compose³£ÓÃÃüÁî
+### composeå¸¸ç”¨å‘½ä»¤
 
-´ó²¿·ÖÃüÁî¶¼¿ÉÒÔÔËÐÐÔÚÒ»¸ö»ò¶à¸ö·þÎñÉÏ¡£Èç¹ûÃ»ÓÐÌØ±ðµÄËµÃ÷£¬ÃüÁîÔòÓ¦ÓÃÔÚÏîÄ¿ËùÓÐµÄ·þÎñÉÏ¡£
+å¤§éƒ¨åˆ†å‘½ä»¤éƒ½å¯ä»¥è¿è¡Œåœ¨ä¸€ä¸ªæˆ–å¤šä¸ªæœåŠ¡ä¸Šã€‚å¦‚æžœæ²¡æœ‰ç‰¹åˆ«çš„è¯´æ˜Žï¼Œå‘½ä»¤åˆ™åº”ç”¨åœ¨é¡¹ç›®æ‰€æœ‰çš„æœåŠ¡ä¸Š  
 
-Ö´ÐÐ docker-compose [COMMAND] --help ²é¿´¾ßÌåÄ³¸öÃüÁîµÄÊ¹ÓÃËµÃ÷¡£
+æ‰§è¡Œ docker-compose [COMMAND] --help æŸ¥çœ‹å…·ä½“æŸä¸ªå‘½ä»¤çš„ä½¿ç”¨è¯´æ˜Žã€‚  
 
-»ù±¾µÄÊ¹ÓÃ¸ñÊ½ÊÇ
+åŸºæœ¬çš„ä½¿ç”¨æ ¼å¼æ˜¯  
 
-docker-compose [options] [COMMAND] [ARGS...]
-Ñ¡Ïî
---verbose Êä³ö¸ü¶àµ÷ÊÔÐÅÏ¢¡£
---version ´òÓ¡°æ±¾²¢ÍË³ö¡£
--f, --file FILE Ê¹ÓÃÌØ¶¨µÄ compose Ä£°åÎÄ¼þ£¬Ä¬ÈÏÎª docker-compose.yml¡£
--p, --project-name NAME Ö¸¶¨ÏîÄ¿Ãû³Æ£¬Ä¬ÈÏÊ¹ÓÃÄ¿Â¼Ãû³Æ¡£
-ÃüÁî
-build
+docker-compose [options] [COMMAND] [ARGS...]    
+é€‰é¡¹  
+--verbose è¾“å‡ºæ›´å¤šè°ƒè¯•ä¿¡æ¯ã€‚  
+--version æ‰“å°ç‰ˆæœ¬å¹¶é€€å‡ºã€‚  
+-f, --file FILE ä½¿ç”¨ç‰¹å®šçš„ compose æ¨¡æ¿æ–‡ä»¶ï¼Œé»˜è®¤ä¸º docker-compose.ymlã€‚  
+-p, --project-name NAME æŒ‡å®šé¡¹ç›®åç§°ï¼Œé»˜è®¤ä½¿ç”¨ç›®å½•åç§°ã€‚  
+å‘½ä»¤
 
-¹¹½¨»òÖØÐÂ¹¹½¨·þÎñ¡£
-
-·þÎñÒ»µ©¹¹½¨ºó£¬½«»á´øÉÏÒ»¸ö±ê¼ÇÃû£¬ÀýÈç web_db¡£
-
-¿ÉÒÔËæÊ±ÔÚÏîÄ¿Ä¿Â¼ÏÂÔËÐÐ docker-compose build À´ÖØÐÂ¹¹½¨·þÎñ¡£
-
-help
-
-»ñµÃÒ»¸öÃüÁîµÄ°ïÖú¡£
-
-kill
-
-Í¨¹ý·¢ËÍ SIGKILL ÐÅºÅÀ´Ç¿ÖÆÍ£Ö¹·þÎñÈÝÆ÷¡£Ö§³ÖÍ¨¹ý²ÎÊýÀ´Ö¸¶¨·¢ËÍµÄÐÅºÅ£¬ÀýÈç
-
+build   
+æž„å»ºæˆ–é‡æ–°æž„å»ºæœåŠ¡ã€‚  
+æœåŠ¡ä¸€æ—¦æž„å»ºåŽï¼Œå°†ä¼šå¸¦ä¸Šä¸€ä¸ªæ ‡è®°åï¼Œä¾‹å¦‚ web_dbã€‚   
+å¯ä»¥éšæ—¶åœ¨é¡¹ç›®ç›®å½•ä¸‹è¿è¡Œ docker-compose build æ¥é‡æ–°æž„å»ºæœåŠ¡ã€‚   
+   
+help  
+èŽ·å¾—ä¸€ä¸ªå‘½ä»¤çš„å¸®åŠ©ã€‚   
+  
+kill  
+é€šè¿‡å‘é€ SIGKILL ä¿¡å·æ¥å¼ºåˆ¶åœæ­¢æœåŠ¡å®¹å™¨ã€‚æ”¯æŒé€šè¿‡å‚æ•°æ¥æŒ‡å®šå‘é€çš„ä¿¡å·ï¼Œä¾‹å¦‚  
+```xml
 $ docker-compose kill -s SIGINT
-logs
+```
+logs  
+æŸ¥çœ‹æœåŠ¡çš„è¾“å‡ºã€‚  
 
-²é¿´·þÎñµÄÊä³ö¡£
+port   
+æ‰“å°ç»‘å®šçš„å…¬å…±ç«¯å£ã€‚   
 
-port
+ps   
+åˆ—å‡ºæ‰€æœ‰å®¹å™¨ã€‚   
+  
+pull  
+æ‹‰å–æœåŠ¡é•œåƒã€‚  
 
-´òÓ¡°ó¶¨µÄ¹«¹²¶Ë¿Ú¡£
-
-ps
-
-ÁÐ³öËùÓÐÈÝÆ÷¡£
-
-pull
-
-À­È¡·þÎñ¾µÏñ¡£
-
-rm
-
-É¾³ýÍ£Ö¹µÄ·þÎñÈÝÆ÷¡£
-
-run
-
-ÔÚÒ»¸ö·þÎñÉÏÖ´ÐÐÒ»¸öÃüÁî¡£
-
-ÀýÈç£º
-
-$ docker-compose run ubuntu ping docker.com
-½«»áÆô¶¯Ò»¸ö ubuntu ·þÎñ£¬Ö´ÐÐ ping docker.com ÃüÁî¡£
-
-Ä¬ÈÏÇé¿öÏÂ£¬ËùÓÐ¹ØÁªµÄ·þÎñ½«»á×Ô¶¯±»Æô¶¯£¬³ý·ÇÕâÐ©·þÎñÒÑ¾­ÔÚÔËÐÐÖÐ¡£
-
-¸ÃÃüÁîÀàËÆÆô¶¯ÈÝÆ÷ºóÔËÐÐÖ¸¶¨µÄÃüÁî£¬Ïà¹Ø¾í¡¢Á´½ÓµÈµÈ¶¼½«»á°´ÕÕÆÚÍû´´½¨¡£
-
-Á½¸ö²»Í¬µã£º
-
-¸ø¶¨ÃüÁî½«»á¸²¸ÇÔ­ÓÐµÄ×Ô¶¯ÔËÐÐÃüÁî£»
-²»»á×Ô¶¯´´½¨¶Ë¿Ú£¬ÒÔ±ÜÃâ³åÍ»¡£
-Èç¹û²»Ï£Íû×Ô¶¯Æô¶¯¹ØÁªµÄÈÝÆ÷£¬¿ÉÒÔÊ¹ÓÃ --no-deps Ñ¡Ïî£¬ÀýÈç
-
-$ docker-compose run --no-deps web python manage.py shell
-½«²»»áÆô¶¯ web ÈÝÆ÷Ëù¹ØÁªµÄÆäËüÈÝÆ÷¡£
-
+rm  
+åˆ é™¤åœæ­¢çš„æœåŠ¡å®¹å™¨ã€‚   
+  
+run   
+åœ¨ä¸€ä¸ªæœåŠ¡ä¸Šæ‰§è¡Œä¸€ä¸ªå‘½ä»¤ã€‚   
+   
+ä¾‹å¦‚ï¼š  
+  
+$ docker-compose run ubuntu ping docker.com  
+å°†ä¼šå¯åŠ¨ä¸€ä¸ª ubuntu æœåŠ¡ï¼Œæ‰§è¡Œ ping docker.com å‘½ä»¤ã€‚   
+   
+é»˜è®¤æƒ…å†µä¸‹ï¼Œæ‰€æœ‰å…³è”çš„æœåŠ¡å°†ä¼šè‡ªåŠ¨è¢«å¯åŠ¨ï¼Œé™¤éžè¿™äº›æœåŠ¡å·²ç»åœ¨è¿è¡Œä¸­ã€‚  
+  
+è¯¥å‘½ä»¤ç±»ä¼¼å¯åŠ¨å®¹å™¨åŽè¿è¡ŒæŒ‡å®šçš„å‘½ä»¤ï¼Œç›¸å…³å·ã€é“¾æŽ¥ç­‰ç­‰éƒ½å°†ä¼šæŒ‰ç…§æœŸæœ›åˆ›å»ºã€‚  
+  
+ä¸¤ä¸ªä¸åŒç‚¹ï¼š  
+ç»™å®šå‘½ä»¤å°†ä¼šè¦†ç›–åŽŸæœ‰çš„è‡ªåŠ¨è¿è¡Œå‘½ä»¤ï¼›  
+ä¸ä¼šè‡ªåŠ¨åˆ›å»ºç«¯å£ï¼Œä»¥é¿å…å†²çªã€‚  
+å¦‚æžœä¸å¸Œæœ›è‡ªåŠ¨å¯åŠ¨å…³è”çš„å®¹å™¨ï¼Œå¯ä»¥ä½¿ç”¨ --no-deps é€‰é¡¹ï¼Œä¾‹å¦‚   
+$ docker-compose run --no-deps web python manage.py shell   
+å°†ä¸ä¼šå¯åŠ¨ web å®¹å™¨æ‰€å…³è”çš„å…¶å®ƒå®¹å™¨ã€‚   
+  
 scale
+è®¾ç½®åŒä¸€ä¸ªæœåŠ¡è¿è¡Œçš„å®¹å™¨ä¸ªæ•°ã€‚   
+é€šè¿‡ service=num çš„å‚æ•°æ¥è®¾ç½®æ•°é‡ã€‚ä¾‹å¦‚ï¼š   
+$ docker-compose scale web=2 worker=3   
+    
+start   
+å¯åŠ¨ä¸€ä¸ªå·²ç»å­˜åœ¨çš„æœåŠ¡å®¹å™¨ã€‚  
 
-ÉèÖÃÍ¬Ò»¸ö·þÎñÔËÐÐµÄÈÝÆ÷¸öÊý¡£
+stop     
+åœæ­¢ä¸€ä¸ªå·²ç»è¿è¡Œçš„å®¹å™¨ï¼Œä½†ä¸åˆ é™¤å®ƒã€‚é€šè¿‡ docker-compose start å¯ä»¥å†æ¬¡å¯åŠ¨è¿™äº›å®¹å™¨ã€‚   
 
-Í¨¹ý service=num µÄ²ÎÊýÀ´ÉèÖÃÊýÁ¿¡£ÀýÈç£º
+up   
+æž„å»ºï¼Œï¼ˆé‡æ–°ï¼‰åˆ›å»ºï¼Œå¯åŠ¨ï¼Œé“¾æŽ¥ä¸€ä¸ªæœåŠ¡ç›¸å…³çš„å®¹å™¨ã€‚    
+é“¾æŽ¥çš„æœåŠ¡éƒ½å°†ä¼šå¯åŠ¨ï¼Œé™¤éžä»–ä»¬å·²ç»è¿è¡Œã€‚    
+é»˜è®¤æƒ…å†µï¼Œ docker-compose up å°†ä¼šæ•´åˆæ‰€æœ‰å®¹å™¨çš„è¾“å‡ºï¼Œå¹¶ä¸”é€€å‡ºæ—¶ï¼Œæ‰€æœ‰å®¹å™¨å°†ä¼šåœæ­¢ã€‚  
+å¦‚æžœä½¿ç”¨ docker-compose up -d ï¼Œå°†ä¼šåœ¨åŽå°å¯åŠ¨å¹¶è¿è¡Œæ‰€æœ‰çš„å®¹å™¨ã€‚  
+é»˜è®¤æƒ…å†µï¼Œå¦‚æžœè¯¥æœåŠ¡çš„å®¹å™¨å·²ç»å­˜åœ¨ï¼Œ docker-compose up å°†ä¼šåœæ­¢å¹¶å°è¯•é‡æ–°åˆ›å»ºä»–ä»¬ï¼ˆä¿æŒä½¿ç”¨ volumes-from æŒ‚è½½çš„å·ï¼‰ï¼Œä»¥ä¿è¯ docker-compose.yml çš„ä¿®æ”¹ç”Ÿæ•ˆã€‚å¦‚æžœä½ ä¸æƒ³å®¹å™¨è¢«åœæ­¢å¹¶é‡æ–°åˆ›å»ºï¼Œå¯ä»¥ä½¿ç”¨ docker-compose up --no-recreateã€‚å¦‚æžœéœ€è¦çš„è¯ï¼Œè¿™æ ·å°†ä¼šå¯åŠ¨å·²ç»åœæ­¢çš„å®¹å™¨ã€‚   
 
-$ docker-compose scale web=2 worker=3
-start
+çŽ¯å¢ƒå˜é‡   
+çŽ¯å¢ƒå˜é‡å¯ä»¥ç”¨æ¥é…ç½® Compose çš„è¡Œä¸ºã€‚      
+ä»¥DOCKER_å¼€å¤´çš„å˜é‡å’Œç”¨æ¥é…ç½® Docker å‘½ä»¤è¡Œå®¢æˆ·ç«¯çš„ä½¿ç”¨ä¸€æ ·ã€‚å¦‚æžœä½¿ç”¨ boot2docker , $(boot2docker shellinit) å°†ä¼šè®¾ç½®å®ƒä»¬ä¸ºæ­£ç¡®çš„å€¼ã€‚     
+COMPOSE_PROJECT_NAME     
+è®¾ç½®é€šè¿‡ Compose å¯åŠ¨çš„æ¯ä¸€ä¸ªå®¹å™¨å‰æ·»åŠ çš„é¡¹ç›®åç§°ï¼Œé»˜è®¤æ˜¯å½“å‰å·¥ä½œç›®å½•çš„åå­—ã€‚    
+COMPOSE_FILE    
+è®¾ç½®è¦ä½¿ç”¨çš„ docker-compose.yml çš„è·¯å¾„ã€‚é»˜è®¤è·¯å¾„æ˜¯å½“å‰å·¥ä½œç›®å½•ã€‚  
+DOCKER_HOST  
+è®¾ç½® Docker daemon çš„åœ°å€ã€‚é»˜è®¤ä½¿ç”¨ unix:///var/run/docker.sockï¼Œä¸Ž Docker å®¢æˆ·ç«¯é‡‡ç”¨çš„é»˜è®¤å€¼ä¸€è‡´ã€‚  
+DOCKER_TLS_VERIFY  
+å¦‚æžœè®¾ç½®ä¸ä¸ºç©ºï¼Œåˆ™ä¸Ž Docker daemon äº¤äº’é€šè¿‡ TLS è¿›è¡Œã€‚  
+DOCKER_CERT_PATH   
+é…ç½® TLS é€šä¿¡æ‰€éœ€è¦çš„éªŒè¯ï¼ˆca.pemã€cert.pem å’Œ key.pemï¼‰æ–‡ä»¶çš„è·¯å¾„ï¼Œé»˜è®¤æ˜¯ ~/.docker ã€‚   
 
-Æô¶¯Ò»¸öÒÑ¾­´æÔÚµÄ·þÎñÈÝÆ÷¡£
-
-stop
-
-Í£Ö¹Ò»¸öÒÑ¾­ÔËÐÐµÄÈÝÆ÷£¬µ«²»É¾³ýËü¡£Í¨¹ý docker-compose start ¿ÉÒÔÔÙ´ÎÆô¶¯ÕâÐ©ÈÝÆ÷¡£
-
-up
-
-¹¹½¨£¬£¨ÖØÐÂ£©´´½¨£¬Æô¶¯£¬Á´½ÓÒ»¸ö·þÎñÏà¹ØµÄÈÝÆ÷¡£
-
-Á´½ÓµÄ·þÎñ¶¼½«»áÆô¶¯£¬³ý·ÇËûÃÇÒÑ¾­ÔËÐÐ¡£
-
-Ä¬ÈÏÇé¿ö£¬ docker-compose up ½«»áÕûºÏËùÓÐÈÝÆ÷µÄÊä³ö£¬²¢ÇÒÍË³öÊ±£¬ËùÓÐÈÝÆ÷½«»áÍ£Ö¹¡£
-
-Èç¹ûÊ¹ÓÃ docker-compose up -d £¬½«»áÔÚºóÌ¨Æô¶¯²¢ÔËÐÐËùÓÐµÄÈÝÆ÷¡£
-
-Ä¬ÈÏÇé¿ö£¬Èç¹û¸Ã·þÎñµÄÈÝÆ÷ÒÑ¾­´æÔÚ£¬ docker-compose up ½«»áÍ£Ö¹²¢³¢ÊÔÖØÐÂ´´½¨ËûÃÇ£¨±£³ÖÊ¹ÓÃ volumes-from ¹ÒÔØµÄ¾í£©£¬ÒÔ±£Ö¤ docker-compose.yml µÄÐÞ¸ÄÉúÐ§¡£Èç¹ûÄã²»ÏëÈÝÆ÷±»Í£Ö¹²¢ÖØÐÂ´´½¨£¬¿ÉÒÔÊ¹ÓÃ docker-compose up --no-recreate¡£Èç¹ûÐèÒªµÄ»°£¬ÕâÑù½«»áÆô¶¯ÒÑ¾­Í£Ö¹µÄÈÝÆ÷¡£
-
-»·¾³±äÁ¿
-»·¾³±äÁ¿¿ÉÒÔÓÃÀ´ÅäÖÃ Compose µÄÐÐÎª¡£
-
-ÒÔDOCKER_¿ªÍ·µÄ±äÁ¿ºÍÓÃÀ´ÅäÖÃ Docker ÃüÁîÐÐ¿Í»§¶ËµÄÊ¹ÓÃÒ»Ñù¡£Èç¹ûÊ¹ÓÃ boot2docker , $(boot2docker shellinit) ½«»áÉèÖÃËüÃÇÎªÕýÈ·µÄÖµ¡£
-
-COMPOSE_PROJECT_NAME
-
-ÉèÖÃÍ¨¹ý Compose Æô¶¯µÄÃ¿Ò»¸öÈÝÆ÷Ç°Ìí¼ÓµÄÏîÄ¿Ãû³Æ£¬Ä¬ÈÏÊÇµ±Ç°¹¤×÷Ä¿Â¼µÄÃû×Ö¡£
-
-COMPOSE_FILE
-
-ÉèÖÃÒªÊ¹ÓÃµÄ docker-compose.yml µÄÂ·¾¶¡£Ä¬ÈÏÂ·¾¶ÊÇµ±Ç°¹¤×÷Ä¿Â¼¡£
-
-DOCKER_HOST
-
-ÉèÖÃ Docker daemon µÄµØÖ·¡£Ä¬ÈÏÊ¹ÓÃ unix:///var/run/docker.sock£¬Óë Docker ¿Í»§¶Ë²ÉÓÃµÄÄ¬ÈÏÖµÒ»ÖÂ¡£
-
-DOCKER_TLS_VERIFY
-
-Èç¹ûÉèÖÃ²»Îª¿Õ£¬ÔòÓë Docker daemon ½»»¥Í¨¹ý TLS ½øÐÐ¡£
-
-DOCKER_CERT_PATH
-
-ÅäÖÃ TLS Í¨ÐÅËùÐèÒªµÄÑéÖ¤£¨ca.pem¡¢cert.pem ºÍ key.pem£©ÎÄ¼þµÄÂ·¾¶£¬Ä¬ÈÏÊÇ ~/.docker ¡£
-
-
-### Ê¹ÓÃDocker Compose²¿ÊðÏîÄ¿
-#### 1.×¼±¸¹¤×÷    
-½«ÏîÄ¿´ò°ü³ÉDocker¾µÏñ¡£¿ÉÒÔÊ¹ÓÃDockerµÄMaven²å¼þ½«ÏîÄ¿´ò°ü³ÉDocker¾µÏñ£¬Ò²¿ÉÒÔÊ¹ÓÃDockerfile»òÕßÆäËû·½Ê½´ò°ü¡£  
-Maven²å¼þ  
-* ¸¸pomÖÐÌí¼Ó²å¼þ¹ÜÀí£º
+ 
+### ä½¿ç”¨Docker Composeéƒ¨ç½²é¡¹ç›®  
+#### 1.å‡†å¤‡å·¥ä½œ      
+å°†é¡¹ç›®æ‰“åŒ…æˆDockeré•œåƒã€‚å¯ä»¥ä½¿ç”¨Dockerçš„Mavenæ’ä»¶å°†é¡¹ç›®æ‰“åŒ…æˆDockeré•œåƒï¼Œä¹Ÿå¯ä»¥ä½¿ç”¨Dockerfileæˆ–è€…å…¶ä»–æ–¹å¼æ‰“åŒ…ã€‚  
+Mavenæ’ä»¶  
+* çˆ¶pomä¸­æ·»åŠ æ’ä»¶ç®¡ç†ï¼š
 
 ```xml
     <pluginManagement>
@@ -293,7 +258,7 @@ Maven²å¼þ
     </pluginManagement>
 ```
 
-* È»ºóÔÚ×ÓÏîÄ¿Ìí¼ÓÒÔÏÂÄÚÈÝ£º
+* ç„¶åŽåœ¨å­é¡¹ç›®æ·»åŠ ä»¥ä¸‹å†…å®¹ï¼š
 
 ```xml
   <build>
@@ -327,20 +292,20 @@ Maven²å¼þ
   </build>
 ```
 
-* ÔÚ¸¸ÏîÄ¿ËùÔÚÂ·¾¶ÏÂ£¬Ö´ÐÐÃüÁî£º
+* åœ¨çˆ¶é¡¹ç›®æ‰€åœ¨è·¯å¾„ä¸‹ï¼Œæ‰§è¡Œå‘½ä»¤ï¼š
 
 
 ```shell
 mvn clean package
 ```
 
-ÕâÑù£¬ÏîÄ¿¾Í»áÎª¸÷¸öÏîÄ¿´ò°ü³Éjar°ü£¬²¢ÇÒ×Ô¶¯ÖÆ×÷³ÉDocker¾µÏñ¡£
+è¿™æ ·ï¼Œé¡¹ç›®å°±ä¼šä¸ºå„ä¸ªé¡¹ç›®æ‰“åŒ…æˆjaråŒ…ï¼Œå¹¶ä¸”è‡ªåŠ¨åˆ¶ä½œæˆDockeré•œåƒã€‚
 
-#### 2.±àÐ´docker-compose.ymlÎÄ¼þ
+#### 2.ç¼–å†™docker-compose.ymlæ–‡ä»¶
 
-#### 3.Æô¶¯²âÊÔÓë¹ÊÕÏÅÅ²é
+#### 3.å¯åŠ¨æµ‹è¯•ä¸Žæ•…éšœæŽ’æŸ¥
 
-ÎÒÃÇÔÚdocker-compose.ymlËùÔÚÂ·¾¶Ö´ÐÐ£º
+æˆ‘ä»¬åœ¨docker-compose.ymlæ‰€åœ¨è·¯å¾„æ‰§è¡Œï¼š
 
 ```shell
 docker-compose up
