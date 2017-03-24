@@ -1,18 +1,19 @@
-## Ê¹ÓÃMaven²å¼ş¹¹½¨Docker¾µÏñ
+## ä½¿ç”¨Mavenæ’ä»¶æ„å»ºDockeré•œåƒ
 
-Docker maven²å¼şÓĞºÜ¶àÖÖ±ÈÈçÈçÏÂµÄ
-²å¼şÃû³Æ	¹Ù·½µØÖ·
-docker-maven-plugin	https://github.com/spotify/docker-maven-plugin
-docker-maven-plugin	https://github.com/fabric8io/docker-maven-plugin
-docker-maven-plugin	https://github.com/bibryam/docker-maven-plugin
-
-
-ÎÒÃÇÒÔµÚÒ»ÖÖÎªÀı×Ó
-1.¼òµ¥Ê¹ÓÃ
-ÔÚpom.xmlÖĞÌí¼ÓÏÂÃæÕâ¶Î
+Docker mavenæ’ä»¶æœ‰å¾ˆå¤šç§æ¯”å¦‚å¦‚ä¸‹çš„   
+|æ’ä»¶åç§°|å®˜æ–¹åœ°å€|  
+|---|---|  
+|docker-maven-plugin|https://github.com/spotify/docker-maven-plugin|  
+|docker-maven-plugin|https://github.com/fabric8io/docker-maven-plugin|  
+|docker-maven-plugin|https://github.com/bibryam/docker-maven-pluginn|  
+    
+æˆ‘ä»¬ä»¥ç¬¬ä¸€ç§ä¸ºä¾‹å­   
+1.ç®€å•ä½¿ç”¨   
+åœ¨pom.xmlä¸­æ·»åŠ ä¸‹é¢è¿™æ®µ  
+```xml
     <build>
         <plugins>
-            <!-- dockerµÄmaven²å¼ş£¬¹ÙÍø£ºhttps://github.com/spotify/docker-maven-plugin -->
+            <!-- dockerçš„mavenæ’ä»¶ï¼Œå®˜ç½‘ï¼šhttps://github.com/spotify/docker-maven-plugin -->
            	<plugin>
 		<groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
@@ -32,34 +33,35 @@ docker-maven-plugin	https://github.com/bibryam/docker-maven-plugin
 			</plugin>
         </plugins>
 </build>
-
-Ö´ĞĞÃüÁî£º
-mvn clean package docker:build
-
-2.Dockerfile
-½¨Á¢ÎÄ¼şDockerfile
-
+```
+æ‰§è¡Œå‘½ä»¤ï¼š   
+mvn clean package docker:build   
+   
+2.Dockerfile   
+å»ºç«‹æ–‡ä»¶Dockerfile   
+```xml
 FROM java:8
 VOLUME /tmp
 ADD microservice-discovery-eureka-0.0.1-SNAPSHOT.jar app.jar
 RUN bash -c 'touch /app.jar'
 EXPOSE 9000
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
-
-ĞŞ¸Äpom.xml
-
+```
+   
+ä¿®æ”¹pom.xml   
+```xml
 <build>
         <plugins>
-            <!-- dockerµÄmaven²å¼ş£¬¹ÙÍø£ºhttps://github.com/spotify/docker-maven-plugin -->
+            <!-- dockerçš„mavenæ’ä»¶ï¼Œå®˜ç½‘ï¼šhttps://github.com/spotify/docker-maven-plugin -->
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.12</version>
                 <configuration>
-                    <!-- ×¢ÒâimageNameÒ»¶¨ÒªÊÇ·ûºÏÕıÔò[a-z0-9-_.]µÄ£¬·ñÔò¹¹½¨²»»á³É¹¦ -->
-                    <!-- Ïê¼û£ºhttps://github.com/spotify/docker-maven-plugin    Invalid repository name ... only [a-z0-9-_.] are allowed-->
+                    <!-- æ³¨æ„imageNameä¸€å®šè¦æ˜¯ç¬¦åˆæ­£åˆ™[a-z0-9-_.]çš„ï¼Œå¦åˆ™æ„å»ºä¸ä¼šæˆåŠŸ -->
+                    <!-- è¯¦è§ï¼šhttps://github.com/spotify/docker-maven-plugin    Invalid repository name ... only [a-z0-9-_.] are allowed-->
                     <imageName>microservice-discovery-eureka-dockerfile</imageName>
-                    <!-- Ö¸¶¨DockerfileËùÔÚµÄÂ·¾¶ -->
+                    <!-- æŒ‡å®šDockerfileæ‰€åœ¨çš„è·¯å¾„ -->
                     <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
                     <resources>
                         <resource>
@@ -72,37 +74,39 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
             </plugin>
         </plugins>
 </build>
-
-3.½«Docker¾µÏñpushµ½DockerHubÉÏ
-Ê×ÏÈĞŞ¸ÄMavenµÄÈ«¾ÖÅäÖÃÎÄ¼şsettings.xml£¬Ìí¼ÓÒÔÏÂ¶ÎÂä
+```
+   
+3.å°†Dockeré•œåƒpushåˆ°DockerHubä¸Š   
+é¦–å…ˆä¿®æ”¹Mavençš„å…¨å±€é…ç½®æ–‡ä»¶settings.xmlï¼Œæ·»åŠ ä»¥ä¸‹æ®µè½   
+```xml
 <servers>
   <server>
     <id>docker-hub</id>
-    <username>ÄãµÄDockerHubÓÃ»§Ãû</username>
-    <password>ÄãµÄDockerHubÃÜÂë</password>
+    <username>ä½ çš„DockerHubç”¨æˆ·å</username>
+    <password>ä½ çš„DockerHubå¯†ç </password>
     <configuration>
-      <email>ÄãµÄDockerHubÓÊÏä</email>
+      <email>ä½ çš„DockerHubé‚®ç®±</email>
     </configuration>
   </server>
 </servers>
-ÔÚDockerHubÉÏ´´½¨repo,ÀıÈç£ºtest£¬ÈçÏÂÍ¼
-DockerHub
-
-ÏîÄ¿pom.xmlĞŞ¸ÄÎªÈçÏÂ£º×¢ÒâimageNameµÄÂ·¾¶ÒªºÍrepoµÄÂ·¾¶Ò»ÖÂ
+```  
+åœ¨DockerHubä¸Šåˆ›å»ºrepo  
+é¡¹ç›®pom.xmlä¿®æ”¹ä¸ºå¦‚ä¸‹ï¼šæ³¨æ„imageNameçš„è·¯å¾„è¦å’Œrepoçš„è·¯å¾„ä¸€è‡´   
+```xml
 <build>
         <plugins>
-            <!-- dockerµÄmaven²å¼ş£¬¹ÙÍø£ºhttps://github.com/spotify/docker-maven-plugin -->
+            <!-- dockerçš„mavenæ’ä»¶ï¼Œå®˜ç½‘ï¼šhttps://github.com/spotify/docker-maven-plugin -->
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.12</version>
                 <configuration>
-                    <!-- ×¢ÒâimageNameÒ»¶¨ÒªÊÇ·ûºÏÕıÔò[a-z0-9-_.]µÄ£¬·ñÔò¹¹½¨²»»á³É¹¦ -->
-                    <!-- Ïê¼û£ºhttps://github.com/spotify/docker-maven-plugin Invalid repository 
+                    <!-- æ³¨æ„imageNameä¸€å®šè¦æ˜¯ç¬¦åˆæ­£åˆ™[a-z0-9-_.]çš„ï¼Œå¦åˆ™æ„å»ºä¸ä¼šæˆåŠŸ -->
+                    <!-- è¯¦è§ï¼šhttps://github.com/spotify/docker-maven-plugin Invalid repository 
                         name ... only [a-z0-9-_.] are allowed -->
-                    <!-- Èç¹ûÒª½«docker¾µÏñpushµ½DockerHubÉÏÈ¥µÄ»°£¬Õâ±ßµÄÂ·¾¶ÒªºÍrepoÂ·¾¶Ò»ÖÂ -->
+                    <!-- å¦‚æœè¦å°†dockeré•œåƒpushåˆ°DockerHubä¸Šå»çš„è¯ï¼Œè¿™è¾¹çš„è·¯å¾„è¦å’Œrepoè·¯å¾„ä¸€è‡´ -->
                     <imageName>eacdy/test</imageName>
-                    <!-- Ö¸¶¨DockerfileËùÔÚµÄÂ·¾¶ -->
+                    <!-- æŒ‡å®šDockerfileæ‰€åœ¨çš„è·¯å¾„ -->
                     <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
                     <resources>
                         <resource>
@@ -111,38 +115,42 @@ DockerHub
                             <include>${project.build.finalName}.jar</include>
                         </resource>
                     </resources>
-                    <!-- ÒÔÏÂÁ½ĞĞÊÇÎªÁËdocker pushµ½DockerHubÊ¹ÓÃµÄ¡£ -->
+                    <!-- ä»¥ä¸‹ä¸¤è¡Œæ˜¯ä¸ºäº†docker pushåˆ°DockerHubä½¿ç”¨çš„ã€‚ -->
                     <serverId>docker-hub</serverId>
                     <registryUrl>https://index.docker.io/v1/</registryUrl>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-Ö´ĞĞÃüÁî£º
-mvn clean package docker:build  -DpushImage
-¸ã¶¨£¬µÈ¹¹½¨³É¹¦ºó£¬ÎÒÃÇ»á·¢ÏÖDocker¾µÏñÒÑ¾­±»pushµ½DockerHubÉÏÁË¡£
+    ```   
+æ‰§è¡Œå‘½ä»¤ï¼š   
+mvn clean package docker:build  -DpushImage   
+æå®šï¼Œç­‰æ„å»ºæˆåŠŸåï¼Œæˆ‘ä»¬ä¼šå‘ç°Dockeré•œåƒå·²ç»è¢«pushåˆ°DockerHubä¸Šäº†ã€‚   
+   
+4.å°†é•œåƒpushåˆ°ç§æœ‰ä»“åº“   
+åœ¨å¾ˆå¤šåœºæ™¯ä¸‹ï¼Œæˆ‘ä»¬éœ€è¦å°†é•œåƒpushåˆ°ç§æœ‰ä»“åº“ä¸­å»ï¼Œè¿™è¾¹ä¸ºäº†è®²è§£çš„å…¨é¢æ€§ï¼Œç§æœ‰ä»“åº“é‡‡ç”¨çš„æ˜¯é…ç½®ç™»å½•è®¤è¯çš„ç§æœ‰ä»“åº“ã€‚   
 
-4.½«¾µÏñpushµ½Ë½ÓĞ²Ö¿â
-ÔÚºÜ¶à³¡¾°ÏÂ£¬ÎÒÃÇĞèÒª½«¾µÏñpushµ½Ë½ÓĞ²Ö¿âÖĞÈ¥£¬Õâ±ßÎªÁË½²½âµÄÈ«ÃæĞÔ£¬Ë½ÓĞ²Ö¿â²ÉÓÃµÄÊÇÅäÖÃµÇÂ¼ÈÏÖ¤µÄË½ÓĞ²Ö¿â¡£
-
-ºÍpush¾µÏñµ½DockerHubÖĞÒ»Ñù£¬ÎÒÃÇÊ×ÏÈĞèÒªĞŞ¸ÄMavenµÄÈ«¾ÖÅäÖÃÎÄ¼şsettings.xml£¬Ìí¼ÓÒÔÏÂ¶ÎÂä
+å’Œpushé•œåƒåˆ°DockerHubä¸­ä¸€æ ·ï¼Œæˆ‘ä»¬é¦–å…ˆéœ€è¦ä¿®æ”¹Mavençš„å…¨å±€é…ç½®æ–‡ä»¶settings.xmlï¼Œæ·»åŠ ä»¥ä¸‹æ®µè½    
+```xml
 <servers>
   <server>
     <id>docker-registry</id>
-    <username>ÄãµÄDockerHubÓÃ»§Ãû</username>
-    <password>ÄãµÄDockerHubÃÜÂë</password>
+    <username>ä½ çš„DockerHubç”¨æˆ·å</username>
+    <password>ä½ çš„DockerHubå¯†ç </password>
     <configuration>
-      <email>ÄãµÄDockerHubÓÊÏä</email>
+      <email>ä½ çš„DockerHubé‚®ç®±</email>
     </configuration>
   </server>
 </servers>
-½«ÏîÄ¿µÄpom.xml¸Ä³ÉÈçÏÂ£¬
+```
+å°†é¡¹ç›®çš„pom.xmlæ”¹æˆå¦‚ä¸‹ï¼Œ
+```xml
 <plugin>
   <groupId>com.spotify</groupId>
   <artifactId>docker-maven-plugin</artifactId>
   <version>0.4.12</version>
   <configuration>
-    <!-- Â·¾¶Îª£ºË½ÓĞ²Ö¿âµØÖ·/ÄãÏëÒªµÄ¾µÏñÂ·¾¶ -->
+    <!-- è·¯å¾„ä¸ºï¼šç§æœ‰ä»“åº“åœ°å€/ä½ æƒ³è¦çš„é•œåƒè·¯å¾„ -->
     <imageName>reg.itmuch.com/test-pull-registry</imageName>
     <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
 
@@ -154,31 +162,32 @@ mvn clean package docker:build  -DpushImage
       </resource>
     </resources>
 
-    <!-- ÓëmavenÅäÖÃÎÄ¼şsettings.xmlÒ»ÖÂ -->
+    <!-- ä¸mavené…ç½®æ–‡ä»¶settings.xmlä¸€è‡´ -->
     <serverId>docker-registry</serverId>
   </configuration>
 </plugin>
-Ö´ĞĞ£º
-mvn clean package docker:build  -DpushImage
-ÉÔµÈÆ¬¿Ì£¬½«»ápush³É¹¦¡£
+```
+æ‰§è¡Œï¼š  
+mvn clean package docker:build  -DpushImage    
+ç¨ç­‰ç‰‡åˆ»ï¼Œå°†ä¼špushæˆåŠŸã€‚   
 
-Èç¹ûÏëÒª´ÓË½·şÉÏÏÂÔØ¸Ã¾µÏñ£¬Ö´ĞĞ£º
-docker login reg.itmuch.com  # È»ºóÊäÈëÕËºÅºÍÃÜÂë
-docker pull reg.itmuch.com/test-pull-registry
-5.½«²å¼ş°ó¶¨ÔÚÄ³¸öphaseÖ´ĞĞ
-ÔÚºÜ¶à³¡¾°ÏÂ£¬ÎÒÃÇÓĞÕâÑùµÄĞèÇó£¬ÀıÈçÖ´ĞĞmvn clean package Ê±£¬×Ô¶¯µØÎªÎÒÃÇ¹¹½¨docker¾µÏñ£¬¿ÉÒÔÂğ£¿´ğ°¸ÊÇ¿Ï¶¨µÄ¡£ÎÒÃÇÖ»ĞèÒª½«²å¼şµÄgoal °ó¶¨ÔÚÄ³¸öphase¼´¿É¡£
+å¦‚æœæƒ³è¦ä»ç§æœä¸Šä¸‹è½½è¯¥é•œåƒï¼Œæ‰§è¡Œï¼š   
+docker login reg.itmuch.com  # ç„¶åè¾“å…¥è´¦å·å’Œå¯†ç    
+docker pull reg.itmuch.com/test-pull-registry   
+5.å°†æ’ä»¶ç»‘å®šåœ¨æŸä¸ªphaseæ‰§è¡Œ    
+åœ¨å¾ˆå¤šåœºæ™¯ä¸‹ï¼Œæˆ‘ä»¬æœ‰è¿™æ ·çš„éœ€æ±‚ï¼Œä¾‹å¦‚æ‰§è¡Œmvn clean package æ—¶ï¼Œè‡ªåŠ¨åœ°ä¸ºæˆ‘ä»¬æ„å»ºdockeré•œåƒï¼Œå¯ä»¥å—ï¼Ÿç­”æ¡ˆæ˜¯è‚¯å®šçš„ã€‚æˆ‘ä»¬åªéœ€è¦å°†æ’ä»¶çš„goal ç»‘å®šåœ¨æŸä¸ªphaseå³å¯ã€‚   
 
-ËùÎ½µÄphaseºÍgoal£¬¿ÉÒÔÕâÑùÀí½â£ºmavenÃüÁî¸ñÊ½ÊÇ£ºmvn phase:goal £¬ÀıÈçmvn package docker:build ÄÇÃ´£¬package ºÍ docker ¶¼ÊÇphase£¬build ÔòÊÇgoal ¡£
+æ‰€è°“çš„phaseå’Œgoalï¼Œå¯ä»¥è¿™æ ·ç†è§£ï¼šmavenå‘½ä»¤æ ¼å¼æ˜¯ï¼šmvn phase:goal ï¼Œä¾‹å¦‚mvn package docker:build é‚£ä¹ˆï¼Œpackage å’Œ docker éƒ½æ˜¯phaseï¼Œbuild åˆ™æ˜¯goal ã€‚     
 
-ÏÂÃæÊÇÊ¾Àı£º
-
-Ê×ÏÈÅäÖÃÊôĞÔ£º
-
+ä¸‹é¢æ˜¯ç¤ºä¾‹ï¼š  
+é¦–å…ˆé…ç½®å±æ€§ï¼š  
+```xml
 <properties>
   <docker.image.prefix>reg.itmuch.com</docker.image.prefix>
 </properties>
-²å¼şÅäÖÃ£º
-
+```
+æ’ä»¶é…ç½®ï¼š
+```xml
   <build>
     <plugins>
       <plugin>
@@ -208,8 +217,9 @@ docker pull reg.itmuch.com/test-pull-registry
       </plugin>
     </plugins>
   </build>
-ÈçÉÏ£¬ÎÒÃÇÖ»ĞèÒªÌí¼Ó£º
-
+  ```
+å¦‚ä¸Šï¼Œæˆ‘ä»¬åªéœ€è¦æ·»åŠ ï¼š
+```xml
         <executions>
           <execution>
             <id>build-image</id>
@@ -219,4 +229,6 @@ docker pull reg.itmuch.com/test-pull-registry
             </goals>
           </execution>
         </executions>
-¼´¿É¡£±¾ÀıÖ¸µÄÊÇ½²dockerµÄbuildÄ¿±ê£¬°ó¶¨ÔÚpackageÕâ¸öphaseÉÏ¡£Ò²¾ÍÊÇËµ£¬ÓÃ»§Ö»ĞèÒªÖ´ĞĞmvn package £¬¾Í×Ô¶¯Ö´ĞĞÁËmvn docker:build ¡£
+	```
+å³å¯ã€‚æœ¬ä¾‹æŒ‡çš„æ˜¯è®²dockerçš„buildç›®æ ‡ï¼Œç»‘å®šåœ¨packageè¿™ä¸ªphaseä¸Šã€‚   
+ä¹Ÿå°±æ˜¯è¯´ï¼Œç”¨æˆ·åªéœ€è¦æ‰§è¡Œmvn package ï¼Œå°±è‡ªåŠ¨æ‰§è¡Œäº†mvn docker:build ã€‚    
