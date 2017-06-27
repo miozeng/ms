@@ -53,19 +53,17 @@ Eureka Server具备单方面有指向的服务传播与同步机制，在一些�
 ``` 
 二、在配置文件中加入安全认证
 ```xml
-# 安全认证的配置  
 security:  
   basic:  
     enabled: true  
   user:  
-    name: mio  # 用户名  
-    password: password   # 用户密码 
-     
-```  
+    name: mio 
+    password: password     
+```
 
 三、微服务注册
 
-``` xml
+```xml
 eureka:  
   client:  
     service-url:  
