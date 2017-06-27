@@ -27,15 +27,11 @@ Ribbon是Netflix发布的云中间层服务开源项目，其主要功能是提�
         factory.setConnectTimeout(3000);
         factory.setReadTimeout(3000);
         return template;
-    }	
-    
-    @Configuration
-	@RibbonClient(name = "foo", configuration = FooConfiguration.class)
-	public class TestConfiguration {
-	}	
+    }	 
 ``` 
 
 ### java代码自定义ribbon配置
+spring cloud 中ribbon默认配置如下（格式）：
 IClientConfig ribbonClientConfig: DefaultClientConfigImpl
 
 IRule ribbonRule: ZoneAvoidanceRule
@@ -49,20 +45,29 @@ ServerListFilter<Server> ribbonServerListFilter: ZonePreferenceServerListFilter
 ILoadBalancer ribbonLoadBalancer: ZoneAwareLoadBalancer
 ``` java
 @Configuration
-public class FooConfiguration {
+public class MyRibbonConfig {
     @Bean
     public IPing ribbonPing(IClientConfig config) {
         return new PingUrl();
     }
+    @Bean
+    public IRule ribbonRule() {
+        return new RandomRule();
+    }
+}
+``` 
+``` java
+@SpringBootApplication
+@EnableEurekaClient
+// 使用此规则不可放在 可扫描的路径下, 如果非要放置, 需要加自定义注解
+@RibbonClient(name = "microserver-provider-user", configuration = MyRibbonConfig.class)
+public class MovieRibbenApplication {
+
 }
 ``` 
 ### 属性自定义ribbon配置
-```yml
-users:
-  ribbon:
-    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
-```     
-    NFLoadBalancerClassName: should implement ILoadBalancer
+<clientName>.ribbo.
+        NFLoadBalancerClassName: should implement ILoadBalancer
 
 	NFLoadBalancerRuleClassName: should implement IRule
 	
@@ -71,5 +76,12 @@ users:
 	NIWSServerListClassName: should implement ServerList
 	
 	NIWSServerListFilterClassName should implement ServerListFilter
+	
+```yml
+users:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
+```     
+   
 ### 脱离Eureka 使用ribbon
-
+配置clientName.ribbon.listOfServers 表明有效的服务列表,可以不依靠eureka server
