@@ -9,8 +9,8 @@
  spring:
    application:
      name: eurekaclient 
-   zipkin:
-    base-url: http://zipkin-server:9411
+#   zipkin:
+#    base-url: http://zipkin-server:9411
     
  server:
    port: 2222
