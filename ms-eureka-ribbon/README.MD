@@ -31,7 +31,8 @@ Ribbon是Netflix发布的云中间层服务开源项目，其主要功能是提�
 ``` 
 
 ### java代码自定义ribbon配置
-spring cloud 中ribbon默认配置如下（格式）：
+spring cloud 中ribbon默认配置如下（格式BeanType beanName:className  ）：      
+
 IClientConfig ribbonClientConfig: DefaultClientConfigImpl
 
 IRule ribbonRule: ZoneAvoidanceRule
