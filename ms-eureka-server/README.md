@@ -30,6 +30,15 @@ eureka.server.eviction-interval-timer-in-ms=30000
 
 
 ### Eureka server高可用性：
+Eureka Server除了单点运行之外，还可以通过运行多个实例，并进行互相注册的方式来实现高可用的部署，所以我们只需要将Eureke Server配置其他可用的serviceUrl就能实现高可用部署。
+  
+demo请看E:\myworkspace\ms\ms-dicovery-eureka
+   
+Eureka Server的同步遵循着一个非常简单的原则：只要有一条边将节点连接，就可以进行信息传播与同步。
+    
+两两注册的方式可以实现集群中节点完全对等的效果，实现最高可用性集群，任何一台注册中心故障都不会影响服务的注册与发现
+
+Eureka Server具备单方面有指向的服务传播与同步机制，在一些对服务发现有限制的情况下，可以利用这样的机制进行服务注册与发现的的单向控制
 
 ### Eureka server 添加用户认证
 一、添加spring-security支持  
