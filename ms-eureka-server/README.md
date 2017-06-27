@@ -1,9 +1,13 @@
 # Eureka server 
-Eureka server 提供服务发现的能力，各个微服务启动时会向Eureka server发送自己的信息（端口 IP 服务名等），Eureka server会存储这些信息
+服务发现组件应具备以下功能：   
+1、服务注册表：是服务发现组件的核心，它用来记录各个微服务的信息，例如微服务的名称、ip、端口等。服务注册表提供查询api和管理api，查询api  
+用于查询可用的微服务实例，管理api用于服务的注册和注销。   
+2、服务注册于发现：服务注册是指微服务在启动时，将自己的信息注册到服务发现组件上的过程，服务发现是指查询可用微服务列表及其网络地址的机制。  
+3、服务检查：服务发现组件使用一定机制定时检测已注册的服务，如发现某实例长时间无法访问，就会从服务注册表中移除该实例。  
 
-微服务启动后，会周期性的向Eureka server发送心跳来续租，一般是30s
-
-如果Eureka server在一定的周期内收不到某个服务的心跳，就会注销该实例，一般默认是90s
+Eureka server 提供服务发现的能力，各个微服务启动时会向Eureka server发送自己的信息（端口 IP 服务名等），Eureka server会存储这些信息  
+微服务启动后，会周期性的向Eureka server发送心跳来续租，一般是30s   
+如果Eureka server在一定的周期内收不到某个服务的心跳，就会注销该实例，一般默认是90s  
 
 
 ### Eureka 常用配置：
@@ -48,17 +52,20 @@ Eureka Server具备单方面有指向的服务传播与同步机制，在一些�
 </dependency>
 ``` 
 二、在配置文件中加入安全认证
-``` yml
+```xml
 # 安全认证的配置  
 security:  
   basic:  
     enabled: true  
   user:  
     name: mio  # 用户名  
-    password: password   # 用户密码  
+    password: password   # 用户密码 
+     
 ```  
+
 三、微服务注册
-``` yml
+
+``` xml
 eureka:  
   client:  
     service-url:  
