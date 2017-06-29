@@ -113,6 +113,9 @@ Thread Pool Properties
   
   
 ### Feign使用Hystrix
+参考HystrixClient 和HystrixClientFallback
+
+controller代码如下：
 ```java
 @FeignClient(name = "EUREKACLIENT", fallback = HystrixClientFallback.class)//
 public interface HystrixClient {
@@ -140,24 +143,35 @@ public class HystrixClientFallback implements HystrixClient {
 ```
 #### 通过fallback factory 检查回退原因
 ```java
-@FeignClient(name = "hello", fallbackFactory = HystrixClientFallbackFactory.class)
-protected interface HystrixClient {
-    @RequestMapping(method = RequestMethod.GET, value = "/hello")
-    Hello iFailSometimes();
+@FeignClient(name = "EUREKACLIENT", fallbackFactory =HystrixClientFallbackFactory.class)//
+public interface HystrixClient2 {
+
+	@RequestMapping(method = RequestMethod.GET, value = "/config/")
+	String iFailSometimes();
 }
 
+public interface HystrixClientWithFallBackFactory extends HystrixClient2 {
+
+}
+
+
+
 @Component
-static class HystrixClientFallbackFactory implements FallbackFactory<HystrixClient> {
+public class HystrixClientFallbackFactory implements FallbackFactory<HystrixClient2>{
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(HystrixClientFallbackFactory.class);
     @Override
-    public HystrixClient create(Throwable cause) {
+    public HystrixClient2 create(Throwable cause) {
+        LOGGER.info("fallback; reason was: ()" + cause.getMessage());
         return new HystrixClientWithFallBackFactory() {
             @Override
-            public Hello iFailSometimes() {
-                return new Hello("fallback; reason was: " + cause.getMessage());
+            public String iFailSometimes() {
+                return "fallback; reason was: " + cause.getMessage();
             }
         };
     }
 }
+
 ```
 #### Feign禁用Hystrix
 在spring cloud项目中，只要Hystrix在classpath下，Feign就会使用断路器，
@@ -209,7 +223,9 @@ Hystrix Dashboard Wiki上详细说明了图上每个指标的含义，如下图�
 hystrix-dashboard-2.png
 到此单个应用的熔断监控已经完成。
 
-## Hturbine聚合监控数据
+以上demo都在ms-feign-hystrix中
+
+## Hturbine聚合监控数据[后期实现]
 上面的例子是单点监控，如果需要同时监控多个服务器，可以使用turbine，聚合Hystrix监控
 在复杂的分布式系统中，相同服务的节点经常需要部署上百甚至上千个，很多时候，运维人员希望能够把相同服务的节点状态以一个整体集群的形式展现出来，这样可以更好的把握整个系统的状态。 为此，Netflix提供了一个开源项目（Turbine）来提供把多个hystrix.stream的内容聚合为一个数据源供Dashboard展示。
 
@@ -217,6 +233,17 @@ hystrix-dashboard-2.png
 
 
 1.添加依赖
+```xml
+<dependency>
+		<groupId>org.springframework.cloud</groupId>
+		<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework.cloud</groupId>
+		<artifactId>spring-cloud-starter-turbine-stream</artifactId>
+	</dependency>
+```
+
 2.添加注解
 3.修改配置文件
 

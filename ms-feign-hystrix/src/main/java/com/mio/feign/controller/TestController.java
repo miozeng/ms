@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mio.feign.service.HelloClient;
 import com.mio.feign.service.HystrixClient;
+import com.mio.feign.service.HystrixClient2;
 
 @RestController
 @RequestMapping(value = "/test")
@@ -22,10 +23,20 @@ public class TestController {
 	@Autowired
 	HelloClient helloClient;
 	
+	
+	@Autowired
+	HystrixClient2 hystrixClient2;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String createCompanys() {
 		  LOG.log(Level.INFO, "calling trace demo backend");
 		return hystrixClient.iFailSometimes();
+	}
+	
+	@RequestMapping(value = "/hh", method = RequestMethod.GET)
+	public String createCompanys2() {
+		  LOG.log(Level.INFO, "calling trace demo backend");
+		return hystrixClient2.iFailSometimes();
 	}
 	
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
