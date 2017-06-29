@@ -20,10 +20,9 @@ public interface HelloClient {
 ```
     
 A: @FeignClient用于通知Feign组件对该接口进行代理(不需要编写接口实现)，使用者可直接通过@Autowired注入。  
-
-B: @RequestMapping表示在调用该方法时需要向/group/{groupId}发送GET请求。   
-
+B: @RequestMapping表示在调用该方法时需要向/hello/发送GET请求。   
 C: @PathVariable与SpringMVC中对应注解含义相同。  
+
 3.controller中实现
 ``` java
 @Autowired
@@ -35,6 +34,11 @@ HelloClient helloClient;
 		return helloClient.hello();
 	}
 ```
+启动注册服务：ms-eureka-server  
+启动feign服务：ms-feign-hystrix   
+启动被调用服务类：ms-eureka-ribbon
+访问localhost:3333/test/hello
+
 4.修改启动类
 启动类添加注解@EnableFeignClients
 
@@ -91,7 +95,7 @@ public class FooConfiguration {
 @FeignClient(name = "eureka-ribbon",configuration=FooConfiguration.Class)
 ``` 
 
-### 手动创建Feign（实践 ）
+### 手动创建Feign
 在某些场景中，通过上述方法，还是不能得到一个想要的Feign客户端。 
 那这个时候，就需要自己通过[Feign Builder API](https://github.com/OpenFeign/feign/#basics)来手动创建客户端。   
 下面这个例子就展现了为同一个接口创建两个不同配置的客户端。
@@ -119,6 +123,8 @@ class FooController {
     }
 }
 ```
+ 
+ 参考MyController，FooClient
  
 ### Feign对继承的支持
 Feign 支持继承，使用继承可以将一些公共操作分组到一些父接口中，从而简化Feign的开发
