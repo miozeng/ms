@@ -245,9 +245,38 @@ hystrix-dashboard-2.png
 ```
 
 2.添加注解
+@EnableTurbine
+   
 3.修改配置文件
+``` XML
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+                         
+turbine:
+   appConfig: hystrixclient
+   combineHostPort: true
+   clusterNameExpression: "'default'"
+```
 
-结合MQ
-1.改造微服务
-2.改造turbine
+test：
+启动项目
+访问http://127.0.0.1:3331/turbine.stream 
+访问http://127.0.0.1:3331/hystrix.stream
+输入http://127.0.0.1:3331/turbine.stream 点击Monitor Stream按钮，就能进入到监控界面
+
+#### 整合rabbitMQ
+安装rabbitMQ     
+访问http://localhost:15672/#/ 查看rabbitMQ   
+
+替换依赖包：     
+
+
+替换注解：     
+
+修改配置文件：
+
+
+  
 

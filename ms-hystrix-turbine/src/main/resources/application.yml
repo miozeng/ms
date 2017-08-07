@@ -1,19 +1,55 @@
 spring:
   application:
-    name: feign-hystrix
-
+    name: turbine
+#  rabbitmq:
+#      addresses: amqp://localhost:5672
+#      username: guest
+#      password: guest
+#     
+#   cloud:
+#       stream:
+#           rabbit:
+#               bindings:
+#                   test:
+#                      consumer:
+#                         prefix: z
+#           bindings:
+#                input:
+#                    group: default
+#management:
+#    port: 8990
+ 
 server:
   port: 3331
+  
 
+  
+   
 eureka:
-  instance:
-    leaseRenewalIntervalInSeconds: 10
-    leaseExpirationDurationInSeconds: 30
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+                         
+turbine:
+   appConfig: hystrixclient
+   combineHostPort: true
+#   aggregator:
+#       clusterConfig: MAIN
+#   clusterNameExpression: metadata['cluster']
+   clusterNameExpression: "'default'"
+#   instanceUrlSuffix: /hystrix.stream
 
-  rabbitmq:
-    addresses: amqp://localhost:5672
-    username: guest
-    password: guest
+
+
+
+
+
+
+
+#turbine:
+ #  stream:
+ #     port: 8888
+
+
+
+
