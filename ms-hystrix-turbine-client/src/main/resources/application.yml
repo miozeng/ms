@@ -1,0 +1,18 @@
+
+ spring:
+   application:
+     name: hystrixclient 
+
+    
+ server:
+   port: 3332
+
+ eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+      
+
+
+   
+  
