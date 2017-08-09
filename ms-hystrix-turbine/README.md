@@ -231,15 +231,6 @@ hystrix-dashboard-2.png
 
 看一个实例Hystrix数据对于整个系统的健康不是很有用。turbine是一个应用程序,该应用程序汇集了所有相关的/hystrix.stream端点到 /turbine.stream用于Hystrix仪表板。运行turbine使用@EnableTurbine注释你的主类，使用spring-cloud-starter-turbine这个jar
 
-修改需要监控的项目的application.yml
-```java 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-    instance:
-       prefer-ip-address: true
-```
 
 1.新建一个监控项目ms-hystrix-turbine     
 添加依赖    
@@ -268,24 +259,28 @@ eureka:
        prefer-ip-address: true
                          
 turbine:
-   appConfig: hystrixclient
+   appConfig: feign-hystrix
    clusterNameExpression: "'default'"
 ```
 
 test：
-启动项目ms-eureka-server，ms-hystrix-turbine-client, ms-hystrix-turbine
-访问：http://127.0.0.1:3332/index 产生监控数据
-访问http://127.0.0.1:3331/turbine.stream 可以看到数据产生
-访问http://127.0.0.1:3331/hystrix.stream
+启动项目ms-eureka-server，ms-feign-hystrix, ms-hystrix-turbine
+访问：http://desktop-2vj9feq:3333/test/hello 产生监控数据
+访问http://127.0.0.1:3331/turbine.stream 可以看到ping
+访问http://127.0.0.1:3333/hystrix
 输入http://127.0.0.1:3331/turbine.stream 点击Monitor Stream按钮，就能进入到监控界面。
 
 #### 整合rabbitMQ
 安装rabbitMQ     
 访问http://localhost:15672/#/ 查看rabbitMQ   
 
-1.改造微服务ms-hystrix-turbine-client       
-添加依赖     
+1.新建微服务ms-hystrix-turbine-client    
+添加依赖     （HystrixDashboard+client）        
 ```xml
+<dependency>
+		<groupId>org.springframework.cloud</groupId>
+		<artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
+	</dependency>
 <dependency>
 		<groupId>org.springframework.cloud</groupId>
 		<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
@@ -296,7 +291,7 @@ test：
 	</dependency>
 ```
 
-修改application.yml
+修改application.yml添加一下内容      
 ``` xml
 spring:
   rabbitmq:
@@ -305,9 +300,11 @@ spring:
       username: guest
       password: guest
 ```
-1.改造turbine ms-hystrix-turbine       
-替换依赖包spring-cloud-starter-turbine为：     
+
+1.改造turbine ms-hystrix-turbine             
+替换依赖包spring-cloud-starter-turbine为：
 ```xml
+
 <dependency>
 		<groupId>org.springframework.cloud</groupId>
 		<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
@@ -320,7 +317,7 @@ spring:
 
 替换注解：     
 @EnableTurbine修改为@EnableTurbineStream 
-
+添加注解@EnableHystrixDashboard
 修改配置文件：
 ``` xml
 turbine:
@@ -339,9 +336,12 @@ spring:
       password: guest
 ```
 
-启动项目ms-eureka-server，ms-hystrix-turbine-client, ms-hystrix-turbine
-
-访问：
+test：
+启动项目ms-eureka-server，ms-hystrix-turbine-client， ms-hystrix-turbine
+访问：http://127.0.0.1:3332/test/test 产生监控数据
+访问http://127.0.0.1:3331/turbine.stream 可以看到ping
+访问http://127.0.0.1:3332/hystrix
+输入http://127.0.0.1:3331 点击Monitor Stream按钮，就能进入到监控界面。
 
 
 

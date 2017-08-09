@@ -2,7 +2,11 @@
  spring:
    application:
      name: hystrixclient 
-
+   rabbitmq:
+        host: localhost
+        port: 5672
+        username: guest
+        password: guest
     
  server:
    port: 3332
