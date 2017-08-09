@@ -6,9 +6,9 @@ _项目基于Spring Boot 1.5.2.RELEASE，Spring Cloud Camden.SR5,各模块简要
 |project|desc|  
 |---|---|  
 |[ms-boot-admin](ms-boot-admin)|Springboot管理|  
-|[ms-eureka-client](ms-eureka-client)|eureka客户端|  
 |[ms-data-rest](ms-data-rest)|Spring data rest使用，提供rest调用，Config配置中心客户端|  
-|[ms-eureka-server](ms-eureka-server)|使用eureka进行服务注册和服务发现.|  
+|[ms-eureka-server](ms-eureka-server)|使用eureka进行服务注册和服务发现.| 
+|[ms-eureka-client](ms-eureka-client)|eureka客户端|  
 |[ms-eureka-ribbon](ms-eureka-ribbon)|Ribbon复杂均衡测试使用|  
 |[ms-feign-hystrix](ms-feign-hystrix)|Feign调用服务，使用hystrix实现服务隔离|
 |[ms-hystrix-turbine](ms-hystrix-turbine)|hystrix dashboard和turbine进行服务监控.|  
