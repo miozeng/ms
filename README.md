@@ -17,7 +17,7 @@ _项目基于Spring Boot 1.5.2.RELEASE，Spring Cloud Camden.SR5,各模块简要
 |[ms-stream-XXX](ms-stream-send)|spring-cloud-stream demo 利用stream和rabbitMQ结合写出消息收发demo和聚合demo|  
 |[ms-spring-config](ms-spring-config)|使用Spring Cloud Config实现配置集中管理.|  
 |[ms-bus-XXX](ms-bus-server)|spring-cloud-bus动态修改配置文件| 
-|[ms-sleuth-zipkin](ms-feign-hystrix)|分布式追踪解决方案，日志收集工具包，使用了Zipkin(未完待续)|  
+|[ms-sleuth-zipkin](ms-sleuth-service1)|分布式追踪解决方案，日志收集工具包，使用了Zipkin|  
 |...|spring-cloud-zookeeper(未完待续)|  
 
 
