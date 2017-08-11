@@ -69,7 +69,7 @@ zipkin是Twitter开发的一个可扩展的分布式开源追踪框架，用于�
 ![Image text](https://github.com/miozeng/ms/blob/master/ms-sleuth-service1/zipkin.png)
 
 ### 微服务整合zipkin
-1.添加依赖
+1.ms-sleuth-service2添加依赖
 ``` xml
 	<dependency> 
 		<groupId>org.springframework.cloud</groupId> 
@@ -92,13 +92,13 @@ spring:
 test  
 启动server
 启动微服务
-访问微服务服务可以获得结果
-访问zipkinserver查看trance
+访问微服务服务可以获得结果http://localhost:9422/
+访问zipkinserver点击 find trances 可以查看结果
 
 ### 使用消息中间件
 使用消息中间件可以微服务zipkinserver解耦，不需要网络互通。      
-#### 改造zipkin server
-1.pom依赖改为
+#### 新建server ms-sleuth-stream-zipkin    
+1.pom依赖       
 ```xml
   <dependency>
         <groupId>org.springframework.cloud</groupId>
@@ -113,25 +113,31 @@ test
         <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
     </dependency>
  <dependency>
-  <groupId>io.zipkin.java</groupId>
-  <artifactId>zipkin-autoconfigure-ui</artifactId>
-  <scope>runtime</scope>
+	  <groupId>io.zipkin.java</groupId>
+	  <artifactId>zipkin-autoconfigure-ui</artifactId>
+	  <scope>runtime</scope>
  </dependency>
 ```
 
-2.注解@EnableZipkinServer 改为EnableZipkinStreamServer
-### 存储跟踪数据
+2.添加注解@EnableZipkinStreamServer      
 
-3.配置文件修改为
+
+3.配置文件修改为       
 ``` xml
- rabbitmq:
+spring:
+  application:
+    name: zipkin-server
+  rabbitmq:
         host: localhost
         port: 5672
         username: guest
         password: guest
+        
+server:
+   port: 9411
 ```
 
-### 改造微服务
+### 改造微服务ms-sleuth-service2
 1.pom添加以下依赖
 ``` xml
 <dependency>
@@ -163,6 +169,7 @@ test
         username: guest
         password: guest
 ```
+同样的方法可以改造service1 调用2的callhome方法可以追踪到service2调用了service1
 
 ### 存储跟踪数据 
 zipkinserver支持多种后端存储，如mysql等。
@@ -208,7 +215,7 @@ spring.datasource.continue-on-error=true
 2.如果依赖了spring-cloud-sleuth-stream，应用将通过Spring Cloud Stream生成并收集traces，应用自动成为tracer消息的生产者，这些消息会通过你的中间件分发(e.g. RabbitMQ,Apache Kafka,Redis)            
 3.如果使用Zipkin或Stream，使用spring.sleuth.sampler.percentage配置输出spans的百分比(默认10%)，不然你可能会认为Sleuth没有工作，因为他省略了一些spans     		
  
-注：SLF4J MDC一直处于工作状态，logback用户可以在logs中立刻看到trace和span id，其他logging系统不得不配置他们自己的模式以得到相同的结果，默认logging.pattern.level设置为%clr(%5p) %clr([${spring.application.name:},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}]){yellow}(对于logback用户，这是一种Spring Boot特征)，这意味着如果你没有使用SLF4J这个模式将不会自动适用   			
+注：SLF4J MDC一直处于工作状态，logback用户可以在logs中立刻看到trace和span id，其他logging系统不得不配置他们自己的模式以得到相同的结果，默认logging.pattern.level设置为%clr(%5p) %clr([${spring.application.name:},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}]){yellow}(对于logback用户，这是一种Spring Boot特征)，这意味着如果你没有使用SLF4J这个模式将不会自动适用       			
 
 ###  抽样(Samling)   
 在分布式追踪时，数据量可能会非常大，因此抽样就变得非常重要(通常不需要导出所有的spans以得到事件发生原貌)， 	    
@@ -224,4 +231,4 @@ public Sampler defaultSampler() {
 ###  Instrumentation
 Spring Cloud Sleuth自动装配所有Spring应用，因此你不用做任何事来让他工作，装配是使用一系列技术添加的，例如对于一个servlet web应用我们使用一个Filter，对于SpringIntegration我们使用ChannelInterceptors。	
 用户可以使用span tags定制关键字，为了限制span数据量，一般一个HTTP请求只会被少数元数据标记，例如status code、host以及URL，用户可以通过配置spring.sleuth.keys.http.headers(一系列头名称)添加request headers。		
-tags仅在Sampler允许其被收集和输出时工作(默认情况其不工作，因此不会有在不配置的情况下收集过多数据的意外危险出现		
+tags仅在Sampler允许其被收集和输出时工作(默认情况其不工作，因此不会有在不配置的情况下收集过多数据的意外危险出现		 
