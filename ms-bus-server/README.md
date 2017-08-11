@@ -36,7 +36,7 @@ management:
     password: password
 ```
 ### 创建bus消费端
-1.添加依赖     
+1.ms-bus-service添加依赖     
 
 2.ms-bus-service 中实现RefreshScope
 '''java
@@ -61,8 +61,8 @@ public class MsBusServiceApplication {
 
 '''
 
-### 配置中心不变，
-
+### 配置中心
+ms-spring-config不变
 
 ### 测试
  1.访问http://localhost:2225/show  Prop value from Config server   
