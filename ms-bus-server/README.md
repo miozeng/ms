@@ -39,8 +39,8 @@ management:
 1.ms-bus-service添加依赖     
 
 2.ms-bus-service 中实现RefreshScope
-'''java
 
+```java
 @RestController
 @RefreshScope
 @SpringBootApplication
@@ -59,7 +59,7 @@ public class MsBusServiceApplication {
 	}
 }
 
-'''
+```
 
 ### 配置中心
 ms-spring-config不变
