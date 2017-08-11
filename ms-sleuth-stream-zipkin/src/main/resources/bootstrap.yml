@@ -1,32 +1,33 @@
   
-server:
-   port: 9411
+#server:
+#   port: 9411
    
 
 
-spring:
-  application:
-    name: zipkin-server
-  rabbitmq:
-    host: localhost
-  datasource:
-    initialize: false
+#spring:
+#  application:
+#    name: zipkin-server
+#  rabbitmq:
+#        host: localhost
+#        port: 5672
+#        username: guest
+#        password: guest
 
----
-spring:
-  profiles: mysql
-  datasource:
-    schema: classpath:/mysql.sql
-    url: jdbc:mysql://${MYSQL_HOST:localhost}/mytest
-    username: root
-    password: root
-# Switch this on to create the schema on startup:
-    initialize: true
-    continueOnError: true
-    
-  sleuth:
-    enabled: false
-    
-zipkin:
-   storage:
-      type: mem # default is mem (in-memory)  mysql
+#---
+#spring:
+#  profiles: mysql
+#  datasource:
+#    schema: classpath:/mysql.sql
+#    url: jdbc:mysql://${MYSQL_HOST:localhost}/mytest
+#    username: root
+#    password: root
+## Switch this on to create the schema on startup:
+#    initialize: true
+#    continueOnError: true
+#    
+#  sleuth:
+#    enabled: false
+#    
+#zipkin:
+#   storage:
+#      type: mem # default is mem (in-memory)  mysql

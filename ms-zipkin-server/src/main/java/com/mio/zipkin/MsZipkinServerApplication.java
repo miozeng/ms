@@ -1,17 +1,15 @@
-package com.mio.sleuth;
+package com.mio.zipkin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import zipkin.server.EnableZipkinServer;
 
 @SpringBootApplication
-//@EnableZipkinStreamServer
 @EnableZipkinServer
-public class MsSleuthZipkinApplication {
+public class MsZipkinServerApplication {
 
-	
 	public static void main(String[] args) {
-		SpringApplication.run(MsSleuthZipkinApplication.class, args);
+		SpringApplication.run(MsZipkinServerApplication.class, args);
 	}
-	
 }
