@@ -13,7 +13,7 @@ _项目基于Spring Boot 1.5.2.RELEASE，Spring Cloud Camden.SR5,各模块简要
 |[ms-feign-hystrix](ms-feign-hystrix)|Feign调用服务，使用hystrix实现服务隔离|
 |[ms-hystrix-turbine](ms-hystrix-turbine)|hystrix dashboard和turbine进行服务监控.|  
 |[ms-gateway-zuul](ms-gateway-zuul)|服务网关|  
-|[ms-security-service](ms-security-service)|安全工具包，为你的应用程序添加安全控制，主要是指OAuth2。(未完待续)|  
+|[ms-security-service](ms-security-service)|安全工具包，为你的应用程序添加安全控制，主要是指OAuth2。|  
 |[ms-stream-XXX](ms-stream-send)|spring-cloud-stream demo 利用stream和rabbitMQ结合写出消息收发demo和聚合demo|  
 |[ms-spring-config](ms-spring-config)|使用Spring Cloud Config实现配置集中管理.|  
 |[ms-bus-XXX](ms-bus-server)|spring-cloud-bus动态修改配置文件| 
