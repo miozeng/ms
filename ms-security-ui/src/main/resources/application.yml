@@ -1,19 +1,22 @@
-auth-server: http://localhost:9999/uaa
+#auth-server: http://localhost:9999/uaa
+#server: 
+#  contextPath: spring_clientServer
 server:
-  port: 8080
-security:
-  basic:
-    enabled: false
-  oauth2:
-    client:
-      client-id: demo
-      client-secret: demo
-      access-token-uri: ${auth-server}/oauth/token
-      user-authorization-uri: ${auth-server}/oauth/authorize
-      scope: read, write
-    resource:
-      jwt:
-        key-uri: ${auth-server}/oauth/token_key
-logging:
-  level:
-    org.springframework.security: DEBUG
+  port: 8071
+  context-path: /spring_oauthClient
+#security:
+#  basic:
+#    enabled: false
+#  oauth2:
+#    client:
+#      client-id: demo
+#      client-secret: demo
+#      access-token-uri: ${auth-server}/oauth/token
+#      user-authorization-uri: ${auth-server}/oauth/authorize
+#      scope: read, write
+#    resource:
+#      jwt:
+#        key-uri: ${auth-server}/oauth/token_key
+#logging:
+#  level:
+#    org.springframework.security: DEBUG

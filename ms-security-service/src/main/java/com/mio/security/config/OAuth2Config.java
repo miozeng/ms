@@ -1,11 +1,6 @@
 package com.mio.security.config;
 
-import java.util.concurrent.TimeUnit;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.oauth2.authserver.AuthorizationServerProperties;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,43 +9,43 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
 @Configuration
 @EnableAuthorizationServer
-@EnableConfigurationProperties({AuthorizationServerProperties.class})
 public class OAuth2Config extends AuthorizationServerConfigurerAdapter{
 
+	@Autowired
+	private AuthenticationManager authenticationManager;
+
+    @Bean
+    public TokenStore tokenStore() {
+       return new InMemoryTokenStore();
+    }
 	
-	  @Autowired
-      AuthenticationManager authenticationManager;
-      @Autowired
-      AuthorizationServerProperties authorizationServerProperties;
+	@Override
+	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+		endpoints.authenticationManager(authenticationManager);
+		endpoints.tokenStore(tokenStore());
+	}
+	
+	@Override 
+	   public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception { 
+	   
+	        oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
+	        System.out.println("********" + oauthServer.getCheckTokenAccess()) ;
+	   }
 
-      @Override
-      public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-          clients.inMemory()
-                  .withClient("demo")
-                  .secret("demo")
-                  .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
-                  .scopes("read", "write")
-                  .accessTokenValiditySeconds((int) TimeUnit.HOURS.toSeconds(1))
-                  .autoApprove(true);
-      }
-
-      @Override
-      public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-          endpoints.authenticationManager(authenticationManager).accessTokenConverter(jwtAccessTokenConverter());
-      }
-
-      @Override
-      public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-          security.tokenKeyAccess(authorizationServerProperties.getTokenKeyAccess());
-      }
-
-      @Bean
-      @ConfigurationProperties("jwt")
-      JwtAccessTokenConverter jwtAccessTokenConverter() {
-          return new JwtAccessTokenConverter();
-      }
+	@Override
+	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+		clients.inMemory().withClient("test1").secret("test1secret")
+				.authorizedGrantTypes("authorization_code", "refresh_token", "password").scopes("openid","read","write")
+				.accessTokenValiditySeconds(300)
+				.and()
+				.withClient("test2").secret("test2secret")
+				.authorizedGrantTypes("authorization_code", "refresh_token", "password").scopes("openid","read","write")
+				.accessTokenValiditySeconds(300)
+				;
+	}
 }
