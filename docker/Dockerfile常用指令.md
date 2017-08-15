@@ -152,3 +152,6 @@ docker build -t miozeng/ms-eureka-server .        
 启动镜像   
 docker run -p 8761:8761 miozeng/ms-eureka-server  
 访问http://Docker宿主机IP:8761 ，我们会发现Eureka能够正常被访问。     
+
+
+dockerfile入门实例：https://github.com/miozeng/ms/blob/master/ms-eureka-server/docker.md

@@ -1,0 +1,7 @@
+version: '2' #该文件使用的是version 2 file format
+services: 
+  eureka:   #指定服务名称
+    build: . #指定dockerfile所在路径
+    ports:
+    - 8761:8761 #指定端口映射
+   

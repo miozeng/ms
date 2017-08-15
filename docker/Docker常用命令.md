@@ -1,3 +1,18 @@
+## docker 架构
+#### docker daemon
+是一个运行在宿主机的后台进程，可以用个docker客户端与之通信
+#### docker client
+docker 的用户界面，可以接受用户命令和配置标识，并与 docker daemon通信
+#### Images
+docker镜像是一个只读模板，可以包含创建docker容器的说明，使用docker镜像可以运行docker镜像中的程序
+#### container
+容器是镜像的可运行实例，
+#### registry
+registry是一个集中存储和分发镜像的服务，构建完整的镜像后就可以在当前宿主机上运行，一个registry可以包含多个docker仓库，每个仓库含有多个镜像标签，每个标签对应一个docker镜像，registry也是可以分为共有和私有，最常用的共有registry就是docker hub
+
+
+![Image text](https://github.com/miozeng/Review/blob/master/docker/docker.png)
+
 ## Docker常用命令
 
 #### 1.Docker常用命令
@@ -69,36 +84,36 @@ $docker rm `docker ps -a -q`  
  -f, --force=false; -l, --link=false Remove the specified link and not the underlying container; -v, -- volumes=false Remove the volumes associated to the container      
 $docker rm Name/ID       
       
-停止、启动、杀死一个容器      
+5.停止、启动、杀死一个容器      
 $docker stop Name/ID     
 $docker start Name/ID     
 $docker kill Name/ID     
     
-从一个容器中取日志;   
+6.从一个容器中取日志;   
  -f, --follow=false Follow log output; -t, --timestamps=false Show timestamps     
 $docker logs Name/ID     
    
-列出一个容器里面被改变的文件或者目录，list列表会显示出三种事件，A 增加的，D 删除的，C 被改变的     
+7.列出一个容器里面被改变的文件或者目录，list列表会显示出三种事件，A 增加的，D 删除的，C 被改变的     
 $docker diff Name/ID     
      
-显示一个运行的容器里面的进程信息     
+8.显示一个运行的容器里面的进程信息     
 $docker top Name/ID     
    
-从容器里面拷贝文件/目录到本地一个路径     
+9.从容器里面拷贝文件/目录到本地一个路径     
 $docker cp Name:/container_path to_path    
 $docker cp ID:/container_path to_path      
    
-重启一个正在运行的容器;   
+10.重启一个正在运行的容器;   
 -t, --time=10 Number of seconds to try to stop for before killing the container, Default=10    
 $docker restart Name/ID     
     
-附加到一个运行的容器上面;   
+11.附加到一个运行的容器上面;   
  --no-stdin=false Do not attach stdin; --sig-proxy=true Proxify all received signal to the process     
 $docker attach ID     
   
 Note： attach命令允许你查看或者影响一个运行的容器。你可以在同一时间attach同一个容器。你也可以从一个容器中脱离出来，是从CTRL-C。   
   
-保存和加载镜像（save、load）   
+12.保存和加载镜像（save、load）   
 当需要把一台机器上的镜像迁移到另一台机器的时候，需要保存镜像与加载镜像。  
   
 保存镜像到一个tar包;   
@@ -113,13 +128,13 @@ $docker save image_name > /home/save.tar  
 $docker load < /home/save.tar    
 
 
-导出容器快照到本地文件(docker export)：
+13.导出容器快照到本地文件(docker export)：
 首先获取容器id：
 docker ps -a
 导出容器到本地镜像库：
 docker export container_id > centos.tar
 
-导入容器快照为镜像(docker import)：
+14.导入容器快照为镜像(docker import)：
 (1)容器在本地：
 cat centos.tar | docker import - registry.intra.weibo.com/yushuang3/centos:v2.0
 (2)容器在网络上：

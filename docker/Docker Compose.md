@@ -2,6 +2,18 @@
 Compose 是一个用于定义和运行多容器的Docker应用的工具。
 使用Compose，你可以在一个配置文件（yaml格式）中配置你应用的服务，然后使用一个命令，即可创建并启动配置中引用的所有服务。
 
+
+### 基本步骤
+1.使用dockerfile 定义应用程序环境，以便在任何地方重现该环境		
+2.在docker-compose.yml中定义组成应用程序的服务，以便各个服务在一个隔离环境中一起运行		
+3.运行docker-compose up命令，启动整个应用程序		 
+
+
+### 实例
+根据docker入门实例：https://github.com/miozeng/ms/blob/master/ms-eureka-server/docker.md	
+dockercompose实例在以上实例的基础上添加docker-compose.yml	
+执行命令docker-compose up 会自动构建镜像并启动容器		
+
 ### docker-compose.yml常用命令
 image   
 指定镜像名称或者镜像id，如果该镜像在本地不存在，Compose会尝试pull下来。   
