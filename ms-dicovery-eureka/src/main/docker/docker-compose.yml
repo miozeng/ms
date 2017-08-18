@@ -1,0 +1,16 @@
+version: '2' 
+services: 
+  peer1:   
+    image: mytest/ms-dicovery-eureka:0.0.1-SNAPSHOT
+    ports:
+     - 8761:8761
+    environment:
+      -spring.profiles.active=peer1 
+  peer2:   
+    image: mytest/ms-dicovery-eureka:0.0.1-SNAPSHOT
+    ports:
+     - 8762:8762
+    environment:
+      -spring.profiles.active=peer2 
+  ms-eureka-client:   
+    image: mytest/ms-eureka-client:0.0.1-SNAPSHOT

@@ -499,15 +499,4 @@ services:
 docker-compose up
 ```
 
-#### 简化docker-compose.yml
-version2file format中，同一个compose工程中的所有服务恭喜一个隔离网络，可使用服务名称来作为主机名来发现其他服务，所以可以简化成一下格式
-``` shell
-version: '2' 
-services: 
-  discovery:   
-    image: mytest/ms-eureka-server:0.0.1-SNAPSHOT
-    ports:
-    - 8761:8761 
-  ms-eureka-client:   
-    image: mytest/ms-eureka-client:0.0.1-SNAPSHOT
-```
+简化docker-compose.yml

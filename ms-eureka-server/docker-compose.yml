@@ -1,0 +1,8 @@
+version: '2' 
+services: 
+  discovery:   
+    image: mytest/ms-eureka-server:0.0.1-SNAPSHOT
+    ports:
+    - 8761:8761 
+  ms-eureka-client:   
+    image: mytest/ms-eureka-client:0.0.1-SNAPSHOT
