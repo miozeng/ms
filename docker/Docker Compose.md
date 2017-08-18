@@ -511,3 +511,51 @@ services:
   ms-eureka-client:   
     image: mytest/ms-eureka-client:0.0.1-SNAPSHOT
 ```
+
+
+### docker spring cloud 高可用实践
+使用项目ms-dicovery-eureka与ms-eureka-client        
+1.修改ms-eureka-client
+``` java
+ eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:8761/eureka/, http://peer2:8761/eureka/
+```
+
+2. 每个项目执行mvn clean package docker:build    
+
+3编写 docker-compose.yml
+``` xml
+version: '2' 
+services: 
+  peer1:   
+    image: mytest/ms-dicovery-eureka:0.0.1-SNAPSHOT
+    ports:
+     - 8761:8761
+    environment:
+      -spring.profiles.active=peer1 
+  peer2:   
+    image: mytest/ms-dicovery-eureka:0.0.1-SNAPSHOT
+    ports:
+     - 8762:8762
+    environment:
+      -spring.profiles.active=peer2 
+  ms-eureka-client:   
+    image: mytest/ms-eureka-client:0.0.1-SNAPSHOT
+```
+
+#### 启动测试
+执行
+```shell
+docker-compose up
+```
+
+执行以下命令可以为微服务动态扩容，
+```shell
+docker-compose scale ms-eureka-client=3
+```
+如果有多个微服务
+```shell
+docker-compose scale ms-eureka-client=3    ms-eureka-client2=3    ms-eureka-client3=3 
+```
