@@ -21,38 +21,39 @@ registry是一个集中存储和分发镜像的服务，构建完整的镜像后
 $docker version          
 显示docker系统的信息          
 $docker info      
-   
-2.对image的操作（search、pull、images、rmi、history）   
-检索image      
+ 
+#### 2.image常用命令
+对image的操作（search、pull、images、rmi、history）   
+1.检索image      
 $docker search image_name     
     
-3.下载image      
+2.下载image      
 $docker pull image_name      
     
-4.发布image（push）    
+3.发布image（push）    
 发布docker镜像      
 $docker push new_image_name     
     
-5.列出镜像列表;   
+4.列出镜像列表;   
  -a, --all=false Show all images; --no-trunc=false Don't truncate output; -q, --quiet=false Only show numeric IDs     
 $docker images      
     
-6.删除一个或者多个镜像;   
+5.删除一个或者多个镜像;   
  -f, --force=false Force; --no-prune=false Do not delete untagged parents      
 $docker rmi image_name     
 
-7.显示一个镜像的历史;   
+6.显示一个镜像的历史;   
  --no-trunc=false Don't truncate output; -q, --quiet=false Only show numeric IDs    
 $docker history image_name     
 
-8.登录registry server（login）   
+7.登录registry server（login）   
 登陆registry server; -e, --email="" Email; -p, --password="" Password; -u, --username="" Username     
 $docker login     
     
 
 
 
-#### 2.Docke容器常用命令
+#### 3.Docke容器常用命令
 image相当于类，container相当于实例，不过可以动态给实例安装新软件，然后把这个container用commit命令固化成一个image。            
 1.启动容器（run）          
 docker容器可以理解为在沙盒中运行的进程。这个沙盒包含了该进程运行所必须的资源，包括文件系统、系统类库、shell 环境等等。但这个沙盒默认是不会运行任何程序的。你需要在沙盒中运行一个进程来启动某一个容器。这个进程是该容器的唯一进程，所以当该进程结束的时候，容器也会完全的停止。    
@@ -72,12 +73,13 @@ $docker ps -a  
 $docker ps -l      
 保存对容器的修改（commit）     
 当你对某一个容器做了修改之后（通过在容器中运行某一个命令），可以把对容器的修改保存下来，这样下次可以从保存后的最新状态运行该容器。    
-保存对容器的修改;     
+
+3.保存对容器的修改;     
  -a, --author="" Author; -m, --message="" Commit message      
 $docker commit ID new_image_name       
      
-4.对容器的操作（rm、stop、start、kill、logs、diff、top、cp、restart、attach）     
-删除所有容器     
+对容器的操作（rm、stop、start、kill、logs、diff、top、cp、restart、attach）     
+4.删除所有容器     
 $docker rm `docker ps -a -q`      
      
 删除单个容器;    
@@ -85,28 +87,28 @@ $docker rm `docker ps -a -q`  
 $docker rm Name/ID       
       
 5.停止、启动、杀死一个容器      
-$docker stop Name/ID     
-$docker start Name/ID     
-$docker kill Name/ID     
+$docker stop Name/ID                 
+$docker start Name/ID               
+$docker kill Name/ID          
     
 6.从一个容器中取日志;   
  -f, --follow=false Follow log output; -t, --timestamps=false Show timestamps     
-$docker logs Name/ID     
+$docker logs Name/ID           
    
 7.列出一个容器里面被改变的文件或者目录，list列表会显示出三种事件，A 增加的，D 删除的，C 被改变的     
 $docker diff Name/ID     
-     
+     
 8.显示一个运行的容器里面的进程信息     
 $docker top Name/ID     
-   
+                  
 9.从容器里面拷贝文件/目录到本地一个路径     
 $docker cp Name:/container_path to_path    
 $docker cp ID:/container_path to_path      
-   
+              
 10.重启一个正在运行的容器;   
 -t, --time=10 Number of seconds to try to stop for before killing the container, Default=10    
 $docker restart Name/ID     
-    
+                 
 11.附加到一个运行的容器上面;   
  --no-stdin=false Do not attach stdin; --sig-proxy=true Proxify all received signal to the process     
 $docker attach ID     
@@ -115,7 +117,6 @@ Note： attach命令允许你查看或者影响一个运行的容器。你可�
   
 12.保存和加载镜像（save、load）   
 当需要把一台机器上的镜像迁移到另一台机器的时候，需要保存镜像与加载镜像。  
-  
 保存镜像到一个tar包;   
 -o, --output="" Write to an file      
 $docker save image_name -o file_path     
@@ -135,21 +136,21 @@ docker ps -a
 docker export container_id > centos.tar
 
 14.导入容器快照为镜像(docker import)：
-(1)容器在本地：
-cat centos.tar | docker import - registry.intra.weibo.com/yushuang3/centos:v2.0
-(2)容器在网络上：
-docker import http://example.com/exampleimage.tgz registry.intra.weibo.com/yushuang3/centos:v2.0
-注意：
-用户既可以使用 docker load 来导入镜像存储文件到本地镜像库，
-也可以使用 docker import 来导入一个容器快照到本地镜像库。
-这两者的区别在于容器快照文件将丢弃所有的历史记录和元数据信息（即仅保存容器当时的快照状态），
-而镜像存储文件将保存完整记录，体积也要大。此外，从容器快照文件导入时可以重新指定标签等元数据信息。
+(1)容器在本地：                      
+cat centos.tar | docker import - registry.intra.weibo.com/yushuang3/centos:v2.0                   
+(2)容器在网络上：                     
+docker import http://example.com/exampleimage.tgz registry.intra.weibo.com/yushuang3/centos:v2.0                         
+注意：                
+用户既可以使用 docker load 来导入镜像存储文件到本地镜像库，            
+也可以使用 docker import 来导入一个容器快照到本地镜像库。                    
+这两者的区别在于容器快照文件将丢弃所有的历史记录和元数据信息（即仅保存容器当时的快照状态），               
+而镜像存储文件将保存完整记录，体积也要大。此外，从容器快照文件导入时可以重新指定标签等元数据信息。                       
 
  
 
 #### 3.镜像加速器   
 
-Docker Hub 在国外，有时候拉取 Image 极其缓慢，可以使用国内的镜像来实现加速  
+Docker Hub 在国外，有时候拉取 Image 极其缓慢，可以使用国内的镜像来实现加速         
 阿里云  
 echo "DOCKER_OPTS=\"--registry-mirror=https://yourlocation.mirror.aliyuncs.com\"" | sudo tee -a /etc/default/docker  
 sudo service docker restart   
