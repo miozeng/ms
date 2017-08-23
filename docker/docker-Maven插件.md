@@ -1,6 +1,7 @@
 ## 使用Maven插件构建Docker镜像
 
 Docker maven插件有很多种比如如下的   
+
 |插件名称|官方地址|  
 |---|---|  
 |docker-maven-plugin|https://github.com/spotify/docker-maven-plugin|  
