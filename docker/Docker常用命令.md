@@ -80,16 +80,19 @@ $docker commit ID new_image_name  
      
 对容器的操作（rm、stop、start、kill、logs、diff、top、cp、restart、attach）     
 4.删除所有容器     
-$docker rm `docker ps -a -q`      
+$docker rm     $(docker ps -aq)
      
 删除单个容器;    
- -f, --force=false; -l, --link=false Remove the specified link and not the underlying container; -v, -- volumes=false Remove the volumes associated to the container      
+ -f, --force=false; -l, --link=false Remove the specified link and not the underlying container; -v, -- volumes=false Remove the volumes associated to the container
+ 
 $docker rm Name/ID       
       
 5.停止、启动、杀死一个容器      
-$docker stop Name/ID                 
-$docker start Name/ID               
-$docker kill Name/ID          
+$docker stop Name/ID    
+
+$docker start Name/ID    
+
+$docker kill Name/ID             
     
 6.从一个容器中取日志;   
  -f, --follow=false Follow log output; -t, --timestamps=false Show timestamps     
